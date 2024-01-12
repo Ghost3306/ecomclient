@@ -11,7 +11,7 @@ function Login() {
     const [showPass, setshowPass] = useState(false)
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
-    const [logData,setLogData] = useState(null);
+    const [res,setres] = useState(null);
     const [cookies, setCookie] = useCookies(['user']);
     const [msg, setmsg] = useState(false);
     const navigate = useNavigate();
@@ -44,12 +44,12 @@ function Login() {
 
     function setdata(){
         try{
-            setCookie('name',logData.data.name,{ path: '/' })
-            setCookie('email',logData.data.email,{ path: '/' })
-            setCookie('phone',logData.data.phone,{ path: '/' })
-            setCookie('address',logData.data.address,{ path: '/' })
-            setCookie('apikey',logData.data.apikey,{ path: '/' })
-            setCookie('birthdate',logData.data.birthdate,{ path: '/' })
+            setCookie('name',res.data.name,{ path: '/' })
+            setCookie('email',res.data.email,{ path: '/' })
+            setCookie('phone',res.data.phone,{ path: '/' })
+            setCookie('address',res.data.address,{ path: '/' })
+            setCookie('apikey',res.data.apikey,{ path: '/' })
+            setCookie('birthdate',res.data.birthdate,{ path: '/' })
         }catch(error){
             console.log(error);
         }
@@ -68,12 +68,20 @@ function Login() {
                 'Content-Type': 'multipart/form-data',
               },
             });
-            setLogData(res.data)
-            console.log("res.data : ",res);
-            setdata();
-            console.log("logdata : ",logData);
-            // if(logData!==null){
-            //     if (logData.status===401){
+            console.log(res.data);
+            console.log(typeof(res.data.data.name));
+            setCookie('name',res.data.data.name,{ path: '/' })
+            setCookie('email',res.data.data.email,{ path: '/' })
+            setCookie('phone',res.data.data.phone,{ path: '/' })
+            setCookie('address',res.data.data.address,{ path: '/' })
+            setCookie('apikey',res.data.data.apikey,{ path: '/' })
+            setCookie('birthdate',res.data.data.birthdate,{ path: '/' })
+            // setres(res.data)
+            // console.log("res.data : ",res);
+            // setdata();
+            // console.log("res : ",res);
+            // if(res!==null){
+            //     if (res.status===401){
             //         setmsg(true)
             //         console.log(msg)
             //     }else{
@@ -82,13 +90,9 @@ function Login() {
             //     }
             // }
             
-          } catch (error) {
+        } catch (error) {
             console.error('Error', error);
-          }
-        
-        
-          
-      
+        }
     }
 
   return (
