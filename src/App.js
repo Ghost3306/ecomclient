@@ -1,5 +1,6 @@
 
 import './App.css';
+import ForgotPass from './Components/Admin/ForgotPass';
 import Login from './Components/Admin/Login';
 import NoPage from './Components/Errors/NoPage';
 import Homepage from './Components/Homepage/Homepage';
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/forgot" element={<ForgotPass/>}/>
         <Route path="*" element={<NoPage/>} />
       </Routes>
     </BrowserRouter>

@@ -3,8 +3,9 @@ import { useState,useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useCookies } from "react-cookie";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorMsg from "../Errors/ErrorMsg";
+import { SHA256 } from 'crypto-js';
 function Login() {
     const [rememberMe, setRememberMe] = useState(false);
     const [disabled, setDisabled] = useState(true);
@@ -60,8 +61,9 @@ function Login() {
       
     const login = async()=>{
         const formData = new FormData();
+        const hashPass = SHA256(password).toString();
         formData.append('username',username);
-        formData.append('password',password);
+        formData.append('password',hashPass);
         
         try {
             const res = await axios.post('http://127.0.0.1:8000/users/login/', formData,
@@ -153,7 +155,7 @@ function Login() {
                     
                     {/* <button type="reset" className="btn btn-danger btn-block mt-3 mx-2">Reset</button> */}
                     <div className="form-group mt-3 text-center">
-                        <a href="" className="text-muted">Forgot Password?</a>
+                        <Link to="/forgot" className="text-muted">Forgot Password?</Link>
                     </div>
                     <div className="form-group text-center">
                         <p className="mb-0">Don't have an account? <a href="" className="text-primary">Register</a></p>
