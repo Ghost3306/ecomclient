@@ -13,7 +13,8 @@ function Login() {
     const [password,setPassword] = useState('');
     const [res,setres] = useState(null);
     const [cookies, setCookie] = useCookies(['user']);
-    const [msg, setmsg] = useState(false);
+    const [msg, setmsg] = useState('');
+    const [msgstate,setmsgState] = useState(false)
     const navigate = useNavigate();
     const handleRememberMeChange = () => {
         setRememberMe(!rememberMe);
@@ -42,14 +43,15 @@ function Login() {
         
     }
 
-    function setdata(){
+    function setdata(res){
         try{
-            setCookie('name',res.data.name,{ path: '/' })
-            setCookie('email',res.data.email,{ path: '/' })
-            setCookie('phone',res.data.phone,{ path: '/' })
-            setCookie('address',res.data.address,{ path: '/' })
-            setCookie('apikey',res.data.apikey,{ path: '/' })
-            setCookie('birthdate',res.data.birthdate,{ path: '/' })
+            setCookie('remember',rememberMe,{path:'/'})
+            setCookie('name',res.name,{ path: '/' })
+            setCookie('email',res.email,{ path: '/' })
+            setCookie('phone',res.phone,{ path: '/' })
+            setCookie('address',res.address,{ path: '/' })
+            setCookie('apikey',res.apikey,{ path: '/' })
+            setCookie('birthdate',res.birthdate,{ path: '/' })
         }catch(error){
             console.log(error);
         }
@@ -68,27 +70,29 @@ function Login() {
                 'Content-Type': 'multipart/form-data',
               },
             });
-            console.log(res.data);
-            console.log(typeof(res.data.data.name));
-            setCookie('name',res.data.data.name,{ path: '/' })
-            setCookie('email',res.data.data.email,{ path: '/' })
-            setCookie('phone',res.data.data.phone,{ path: '/' })
-            setCookie('address',res.data.data.address,{ path: '/' })
-            setCookie('apikey',res.data.data.apikey,{ path: '/' })
-            setCookie('birthdate',res.data.data.birthdate,{ path: '/' })
-            // setres(res.data)
-            // console.log("res.data : ",res);
-            // setdata();
-            // console.log("res : ",res);
-            // if(res!==null){
-            //     if (res.status===401){
-            //         setmsg(true)
-            //         console.log(msg)
-            //     }else{
-                    
-            //         navigate("/");
-            //     }
-            // }
+            
+            console.log(res.data.status);
+            if(res.data.status==='401'){
+                setmsg(res.data.message)
+                setmsgState(true)
+                setTimeout(() => {
+                    // console.log('timeout complete');
+                    setmsgState(false);
+                }, 2000);
+            }
+            if(res.data.status==='200'){
+                // console.log(res.data.data);
+                setres(res.data.data)
+                setdata(res.data.data)
+                navigate('/')
+            }
+            if(res.data.status==='500'){
+                setmsg(res.data.message)
+                setmsgState(true)
+                setTimeout(() => {
+                    setmsgState(false);
+                }, 2000);
+            }
             
         } catch (error) {
             console.error('Error', error);
@@ -97,7 +101,7 @@ function Login() {
 
   return (
     <>
-    {msg && <ErrorMsg msg ="Invalid username or password"/>}
+    {msgstate && <ErrorMsg msg ={msg}/>}
     <div className="container d-flex justify-content-center align-items-center vh-100">
             <div className="login-container p-4 border rounded" style={{ maxWidth: "400px", width: "100%" }}>
                 <form onSubmit={handleSubmit}>
@@ -143,7 +147,10 @@ function Login() {
                         onChange={onChange}
                         />
                     </div>
-                    <button type="submit" onClick={login} disabled={disabled} className="btn btn-primary btn-block mt-3" >Login</button>
+                    <div className="d-flex justify-content-center">
+                        <button  button type="submit" onClick={login} disabled={disabled} className="btn btn-primary btn-block mt-3" >Login</button>
+                    </div>
+                    
                     {/* <button type="reset" className="btn btn-danger btn-block mt-3 mx-2">Reset</button> */}
                     <div className="form-group mt-3 text-center">
                         <a href="" className="text-muted">Forgot Password?</a>
