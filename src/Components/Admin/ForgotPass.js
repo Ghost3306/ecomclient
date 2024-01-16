@@ -214,7 +214,7 @@ const ForgotPass = () => {
         }
     }else{
         setmsgState(true);
-        setMsg('New password and confirm password doesnt match!');
+            
         setTimeout(() => {
             setmsgState(false);
         }, 2000);

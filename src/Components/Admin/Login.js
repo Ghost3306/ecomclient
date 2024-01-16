@@ -17,6 +17,13 @@ function Login() {
     const [msg, setmsg] = useState('');
     const [msgstate,setmsgState] = useState(false)
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        document.title = 'Login'
+        console.log('login useeffect');
+    },[])
+
+
     const handleRememberMeChange = () => {
         setRememberMe(!rememberMe);
     };
@@ -158,7 +165,7 @@ function Login() {
                         <Link to="/forgot" className="text-muted">Forgot Password?</Link>
                     </div>
                     <div className="form-group text-center">
-                        <p className="mb-0">Don't have an account? <a href="" className="text-primary">Register</a></p>
+                        <p className="mb-0">Don't have an account? <Link to="/register" className="text-primary">Register</Link></p>
                     </div>
                 </form>
             </div>
