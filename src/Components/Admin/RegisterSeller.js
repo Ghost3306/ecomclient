@@ -2,7 +2,8 @@ import axios from 'axios';
 import React from 'react'
 import { useState } from 'react'
 import ErrorMsg from '../Errors/ErrorMsg';
-
+import { SHA256 } from 'crypto-js';
+import { useNavigate } from "react-router-dom";
 function RegisterSeller() {
   const [businessName, setBusinessName] = useState('');
   // const [uniqueKey, setUniqueKey] = useState('');
@@ -31,10 +32,12 @@ function RegisterSeller() {
   const [apikey,setApiKey] = useState('');
   const [serverotp,setServerOtp] = useState('');
   const [msgstate,setmsgState] = useState(null);
-  const [msg,setMsg] = useState('');
+  const [msg,setMsg] = useState(false);
   const [otp, setotp] = useState('');
-  const [div,setDiv] =useState(false)
-
+  const [div,setDiv] =useState(false);
+  const [emmsg,setemmsg] = useState('');
+  const [procced, setproc] = useState(false);
+  const navigate = useNavigate();
   const handleInputChange = (e, setStateFunction) => {
     setStateFunction(e.target.value);
   };
@@ -63,6 +66,8 @@ function RegisterSeller() {
                 console.log(res.data.apikey);
                 setServerOtp(res.data.otp)
                 setApiKey(res.data.apikey);
+                setMsg(true)
+                setemmsg('Otp sent to your email id')
                 setDiv(true)
             }
             if(res.data.status==='400'){
@@ -86,7 +91,8 @@ function RegisterSeller() {
     }
 
     const register = async()=>{
-        const formdata = new FormData()
+        const formdata = new FormData();
+        const hashPass = SHA256(crpass).toString();
         formdata.append('bussinessname',businessName);
         formdata.append('bussinessemail',businessEmail);
         formdata.append('phone',phone);
@@ -104,7 +110,7 @@ function RegisterSeller() {
         formdata.append('accno',accNo);
         formdata.append('ifsc',ifsc);
         formdata.append('aadharcard',aadharCard);
-        formdata.append('password',crpass);
+        formdata.append('password',hashPass);
         try{
             const res = await axios.post('http://127.0.0.1:8000/seller/showseller/',formdata,{
                 headers:{
@@ -113,6 +119,9 @@ function RegisterSeller() {
             
             })
             console.log(res.data);
+            if(res.data.status==='200'){
+                navigate('/')
+            }
         }catch(error){
             console.log(error);
         }
@@ -121,13 +130,17 @@ function RegisterSeller() {
     const otpver = ()=>{
         if(otp==serverotp){
             console.log('otpverifed');
+            setemmsg('email verified');
+            setproc(true)
+            setDiv(false);
         }else{
             console.log('not verfied');
+            setemmsg('invalid otp!');
         }
     }
   return (
     <>
-    {msgstate &&  <ErrorMsg msg={msg}/>}
+    {/* {msgstate &&  <ErrorMsg msg={msg}/>} */}
       <div className="container mt-5 " >
         <form onSubmit={onSubmit}>
           <div className="container-fluid ">
@@ -172,12 +185,16 @@ function RegisterSeller() {
                         <input type="email" value={businessEmail} className="form-control" id="floatingInput2" placeholder="abc@gmail.com" onBlur={outfocus} onChange={(e) => handleInputChange(e, setBusinessEmail)}/>
                         <label htmlFor="floatingInput2">Bussiness Email</label>
                     </div>
+                    {msg && <p>{emmsg}</p>}
                 </div>
-                <div className="p-2 flex-fill bd-highlight">
-                    {div && <div className="form-floating mb-3">
+                <div className="flex-fill bd-highlight">
+                    {div && <div className="form-floating mb-3 mx-3">
                             <input type="number" value={otp} className="form-control" id="floatingInput2" placeholder="0000" onChange={(e) => handleInputChange(e, setotp)}/>
                             <label htmlFor="floatingInput2">OTP</label>
-                            <button onClick={otpver} className='btn btn-primary'>Verify</button>
+                            <div className="div my-2">
+                                <button onClick={otpver} className='btn btn-primary btn-sm'>Verify</button>
+                            </div>
+                            
                         </div>}
 
                 </div>
@@ -310,11 +327,14 @@ function RegisterSeller() {
                 </div>
 
             </div>
-
-              <div className="d-flex flex-row bd-highlight mb-3">
+            {procced?<div className="d-flex flex-row bd-highlight mb-3">
                 <button type="submit" className="btn btn-primary" onClick={register}>Submit</button>
-                {/* <button type="reset" className="btn btn-danger mx-3">Clear</button> */}
-              </div>
+                
+              </div>:<div className="d-flex flex-row bd-highlight mb-3 ">
+                <h4 className='text-center' style={{color:'red'}}>Please verify your email to procced</h4>
+                
+              </div>}
+              
           </div>
         </form>
       </div>
