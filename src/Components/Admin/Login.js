@@ -126,7 +126,7 @@ function Login() {
                     <div className="d-flex justify-content-between my-2">
                         
 
-                        <div className="form-check">
+                        {/* <div className="form-check">
                             <input
                                     type="checkbox"
                                     className="form-check-input"
@@ -135,7 +135,7 @@ function Login() {
                                     onChange={handleRememberMeChange} 
                                 />
                             <label className="form-check-label" htmlFor="rememberMe">Remember me</label>
-                        </div>
+                        </div> */}
 
 
                         <div className="form-check">

@@ -53,10 +53,19 @@ function SellerLogin() {
 
     function setdata(res){
         try{
-            console.log(res);
-            setCookie('sellerapikey',res.uniquekey,{ path: '/' });
-            setCookie('name',res.name,{ path: '/' });
-            setCookie('email',res.email,{ path: '/' })
+            if(rememberMe){
+                console.log(res);
+                setCookie('remember',true,{ path: '/' });
+                setCookie('sellerapikey',res.uniquekey,{ path: '/' });
+                setCookie('name',res.name,{ path: '/' });
+                setCookie('email',res.email,{ path: '/' })
+            }else{
+                setCookie('remember',false,{ path: '/' });
+                setCookie('sellerapikey',res.uniquekey,{ path: '/' });
+                setCookie('name',res.name,{ path: '/' });
+                setCookie('email',res.email,{ path: '/' })
+            }
+            
             
         }catch(error){
             console.log(error);
@@ -124,7 +133,16 @@ function SellerLogin() {
                     <div className="d-flex justify-content-between my-2">
                         
 
-                        
+                    {/* <div className="form-check">
+                            <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    id="rememberMe"
+                                    checked={rememberMe} 
+                                    onChange={handleRememberMeChange} 
+                                />
+                            <label className="form-check-label" htmlFor="rememberMe">Remember me</label>
+                        </div> */}
 
                         <div className="form-check">
                             <input
