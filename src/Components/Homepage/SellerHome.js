@@ -10,16 +10,15 @@ function SellerHome() {
   useEffect(()=>{
     if(cookie.email==='logout'){
       navigate('/sellerlogin')
+    }else if(!cookie.email){
+      navigate('/sellerlogin')
     }
   },[])
 
 
   return (
     <>
-     
-        <AddProduct/>
-    
-      
+        <AddProduct/>  
     </>
   )
 }
