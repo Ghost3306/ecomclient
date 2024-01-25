@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import Products from './Products';
 
 function AddProduct() {
     const navigate = useNavigate()
@@ -231,7 +232,7 @@ function AddProduct() {
                 </div>}
 
                 </div>
-                <div className="p-2 bd-highlight">List Of Products to be added</div>
+                <div className="p-2 bd-highlight"><Products/></div>
             </div>
             
            
