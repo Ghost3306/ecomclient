@@ -23,7 +23,8 @@ function AddProduct() {
     const [image4, setImage4] = useState(null);
     const [image5, setImage5] = useState(null);
 
-
+    const [productstate,setState] = useState(true);
+    const [reload ,setOnReload] = useState(true);
 
     const logout =()=>{
         setCookie('sellerapikey','logout',{ path: '/' });
@@ -34,7 +35,11 @@ function AddProduct() {
     }
     const addProduct = ()=>{
         console.log('product adding start');
-        
+        if(productstate){
+            setState(false);
+        }else{
+            setState(true)
+        }
         if(addprod){
             setaddprod(false);
         }else{
@@ -92,6 +97,8 @@ function AddProduct() {
             })
 
             console.log(res.data);
+            setState(true);
+            setaddprod(false);
         }catch(error){
             console.log(error);
         }
@@ -232,7 +239,7 @@ function AddProduct() {
                 </div>}
 
                 </div>
-                <div className="p-2 bd-highlight"><Products/></div>
+                {productstate && <div className="p-2 bd-highlight"><Products /></div>}
             </div>
             
            
