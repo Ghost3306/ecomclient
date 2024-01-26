@@ -239,7 +239,7 @@ function AddProduct() {
                 </div>}
 
                 </div>
-                {productstate && <div className="p-2 bd-highlight"><Products /></div>}
+                {productstate && <div className="p-2 bd-highlight"><Products  adddel= {setaddprod}/></div>}
             </div>
             
            
