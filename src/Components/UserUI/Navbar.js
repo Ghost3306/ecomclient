@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import { useRef,useEffect } from "react";
 import axios from "axios";
-
-export default function Navbar() {
+import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+export default function Navbar(props) {
   const [inputValue, setInputValue] = useState("");
   const [res, setRes] = useState(null);
   const [comp, setComp] = useState(null);
   const [ret, setRet] = useState(null);
   const [isDivVisible, setIsDivVisible] = useState(false);
   const inputRef = useRef();
+  const [cookie,setCookie] = useCookies(['user'])
+  const [loginm,setLoginNm] = useState(null);
+  const [userclk,setclk] = useState(false);
+  useEffect(()=>{
+    if(cookie.name){
+      setLoginNm(cookie.name)
+    }
+  },[])
 
   const handleInputFocus = () => {
     setIsDivVisible(true);
   };
 
   const handleClickOutside = (event) => {
-    console.log(inputRef.current);
+    // console.log(inputRef.current);
     if (inputRef.current && !inputRef.current.contains(event.target)) {
       setIsDivVisible(false);
     }
@@ -29,6 +38,11 @@ export default function Navbar() {
     };
   }, []);
 
+  const logout =()=>{
+    setCookie('name',null,{ path: '/' });
+    setclk(false);
+    setLoginNm(null);
+  }
   const handlleChange = async (event) => {
     setInputValue(event.target.value);
     const formdata = new FormData();
@@ -65,30 +79,37 @@ export default function Navbar() {
         })
         setRet(res.data);
         setRes(null);
+        props.setproduct(res.data);
+        props.searched(true);
+        props.carousel(false);
     } catch (error) {
       console.error("An error occurred:", error.message);
     }
 
   };
 
+  const home = ()=>{
+    props.searched(false);
+    props.carousel(true)
+  }
   return (
     <>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Sell Products Online</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <Link class="navbar-brand" to="/" onClick={home}>Sell Products Online</Link>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                 <div >
-                    <form class="d-flex">
-                        <input type="text" className="form-control me-2" value={inputValue} id="" onChange={handlleChange} ref={inputRef} onFocus={handleInputFocus}/>
-                        <button type="submit" className="btn btn-outline-success" onClick={handleSearch}>Search</button>
+                    <form class="d-flex" onSubmit={(e)=>{e.preventDefault()}}>
+                        <input type="text" className="form-control me-2" value={inputValue} placeholder="Search eg. earthen pots" onChange={handlleChange} ref={inputRef} style={{width:'25rem'}} onFocus={handleInputFocus}/>
+                        <button type="submit"  className="btn btn-outline-success" onClick={handleSearch}>Search</button>
                     </form>
                     
-                    <div className="con"style={{position: "absolute",maxHeight: "330px",overflowY: "auto",width:'100%'}}>  
+                    <div className="con"style={{position: "absolute",maxHeight: "330px",overflowY: "auto",width:'100%',zIndex:'99'}}>  
                         {isDivVisible && res &&
                         res.map((element, index) => {
                             const handleClick = () => {
@@ -96,10 +117,10 @@ export default function Navbar() {
                             setInputValue(element.name);
                             setRes([{ name: element.name }]);
                             };
-                            <div className="container"></div>;
+                            <div className="container" ></div>;
                                 return (
-                                    <div className="container my-1" key={index}>
-                                        <button ref={inputRef} style={{backgroundColor:'transparent',border:'1 px solid blue',height:'40px',marginTop:'10px'}}
+                                    <div className="container my-1"  key={index}>
+                                        <button ref={inputRef} style={{backgroundColor:'#fff',border:'1 px solid blue',height:'40px',marginTop:'10px'}}
                                         type="submit" onClick={handleClick} value={element.name}>{element.name}</button>
                                     </div>
                             );
@@ -111,29 +132,35 @@ export default function Navbar() {
 
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <Link class="nav-link" to="/registerseller">Became a Seller!</Link>
                 </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"/></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+                
+
             </ul>
-            
-
-
-
+              
+              {loginm?<div className="d-flex">
+              <p className="form-control me-4" onClick={()=>{
+                if(userclk){
+                  setclk(false);
+                }else{
+                  setclk(true);
+                }
+              }
+                }>Hello! {cookie.name}</p>
+              {userclk && <div className="div" style={{position:'absolute',top:'70%',border:'1px solid black',width:'10%',height:'300px',zIndex:'99',background:'#fff'}}>
+                        <button type="button" onClick={logout} className="btn btn-info btn-sm" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
+                </div>   }
             </div>
+              
+            :<form className="d-flex">
+                  <Link to='/login' className="btn btn-primary mx-4">Login</Link>
+       
+            </form>}
+            
+            </div>
+            
         </div>
+       
     </nav>
 
 

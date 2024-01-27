@@ -6,6 +6,9 @@ import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
 import ErrorMsg from "../Errors/ErrorMsg";
 import { SHA256 } from 'crypto-js';
+import Toast from "../Errors/Toast";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Login() {
     const [rememberMe, setRememberMe] = useState(false);
     const [disabled, setDisabled] = useState(true);
@@ -111,6 +114,7 @@ function Login() {
   return (
     <>
     {msgstate && <ErrorMsg msg ={msg}/>}
+
     <div className="container d-flex justify-content-center align-items-center vh-100">
             <div className="login-container p-4 border rounded" style={{ maxWidth: "400px", width: "100%" }}>
                 <form onSubmit={handleSubmit}>
