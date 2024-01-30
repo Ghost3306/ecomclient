@@ -71,7 +71,8 @@ export default function Navbar(props) {
 
     try {
         const formdata = new FormData();
-        formdata.append('input',inputValue)
+        formdata.append('input',inputValue);
+        formdata.append('page',1)
         const res = await axios.post('http://127.0.0.1:8000/products/searchproduct/',formdata,{
             headers:{
                 'Content-Type':'multipart/form-data'
@@ -94,7 +95,7 @@ export default function Navbar(props) {
   }
   return (
     <>    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{}}>
         <div class="container-fluid">
             <Link class="navbar-brand" to="/" onClick={home}>Sell Products Online</Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
