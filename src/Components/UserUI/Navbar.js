@@ -80,8 +80,15 @@ export default function Navbar(props) {
         })
         setRet(res.data);
         setRes(null);
+        
         props.setproduct(res.data);
-        props.searched(true);
+        props.tag(inputValue);
+        // console.log('data setted to searched product',res.data);
+        
+        props.searched(false);
+        setTimeout(()=>{
+          props.searched(true);
+        },0)
         props.carousel(false);
     } catch (error) {
       console.error("An error occurred:", error.message);
@@ -95,17 +102,17 @@ export default function Navbar(props) {
   }
   return (
     <>    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{}}>
-        <div class="container-fluid">
-            <Link class="navbar-brand" to="/" onClick={home}>Sell Products Online</Link>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-            <span class="navbar-toggler-icon"></span>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{}}>
+        <div className="container-fluid">
+            <Link className="navbar-brand" to="/" onClick={home}>Sell Products Online</Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+            <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
                 <div >
-                    <form class="d-flex" onSubmit={(e)=>{e.preventDefault()}}>
+                    <form className="d-flex" onSubmit={(e)=>{e.preventDefault()}}>
                         <input type="text" className="form-control me-2" value={inputValue} placeholder="Search eg. earthen pots" onChange={handlleChange} ref={inputRef} style={{width:'25rem'}} onFocus={handleInputFocus}/>
                         <button type="submit"  className="btn btn-outline-success" onClick={handleSearch}>Search</button>
                     </form>
@@ -132,8 +139,8 @@ export default function Navbar(props) {
 
 
                 </li>
-                <li class="nav-item">
-                <Link class="nav-link" to="/registerseller">Became a Seller!</Link>
+                <li className="nav-item">
+                <Link className="nav-link" to="/registerseller">Became a Seller!</Link>
                 </li>
                 
 

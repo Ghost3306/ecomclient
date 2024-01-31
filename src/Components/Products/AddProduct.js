@@ -154,10 +154,26 @@ function AddProduct() {
                             <label className="visually-hidden" htmlFor="specificSizeSelect">Preference</label>
                             <select className="form-select" value={category} onChange={(e) => handleInputChange(e, setcategory)}id="specificSizeSelect">
                             <option defaultValue={category}>Category</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Jewelry">Jewelry</option>
-                            <option value="Candles">Candles</option>
-                            <option value="Bags">Bags</option>
+                            <option value="Clothing and Apparel">Clothing and Apparel</option>
+                            <option value="Home and Kitchen">Home and Kitchen</option>
+                            <option value="Health and Beauty">Health and Beauty</option>
+                            <option value="Sports and Outdoors">Sports and Outdoors</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Toys and Games">Toys and Games</option>
+                            <option value="Books and Media">Books and Media</option>
+                            <option value="Office and School Supplies">Office and School Supplies</option>
+                            <option value="Jewelry and Accessories">Jewelry and Accessories</option>
+                            <option value="Pet Supplies">Pet Supplies</option>
+                            <option value="Appliances">Appliances</option>
+                            <option value="Tools and Home Improvement">Tools and Home Improvement</option>
+                            <option value="Electrical and Lighting">Electrical and Lighting</option>
+                            <option value="Crafts and Hobbies">Crafts and Hobbies</option>
+                            <option value="Baby and Nursery">Baby and Nursery</option>
+                            <option value="Garden and Outdoor Living">Garden and Outdoor Living</option>
+                            
+                            
+                            
+
                             </select>
                         </div>
                     </div>

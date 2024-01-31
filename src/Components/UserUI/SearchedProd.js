@@ -4,7 +4,6 @@ import ProductItem from './ProductItem';
 function SearchedProd(props) {
     const [products, setProducts] = useState(null);
     useEffect(()=>{
-        // console.log(products);
         setProducts(props.name)
         
     },[])
@@ -14,13 +13,17 @@ function SearchedProd(props) {
     <div className="contain" style={{width:'100%',height:'auto',border:'1px solid black',display:'flex',}}>
         <div className="side" style={{width:'20%',border:'1px solid black',height:'100vh'}}>Side</div>
         {products && <div className="product" style={{width:'80%',border:'1px solid black',position:'absolute',left:'20%'}}>
-
+            {products.map((element,index)=>{
+                return<div className="div" key={index}>
+                    <ProductItem data = {element}/>
+                </div>
+            })}
+            
+            {/* <ProductItem data = {products}/>
             <ProductItem data = {products}/>
             <ProductItem data = {products}/>
             <ProductItem data = {products}/>
-            <ProductItem data = {products}/>
-            <ProductItem data = {products}/>
-            <ProductItem data = {products}/>
+            <ProductItem data = {products}/> */}
 
 
         </div>}
