@@ -32,14 +32,14 @@ function ProductItem(props) {
                 <p>&#8377;</p>
                 <h3>{props.data.price}</h3>
                 <p>+ {props.data.delivertcharge} delivery</p>
-                <div className="div">
+                {/* <div className="div">
                   <div class="d-flex justify-content-end" style={{position:'absolute',left:'80%'}}>
                     <div>
                       <button type="button" className='btn btn-primary' onClick={addcart}>Add to Cart</button>
                     </div>
                     
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="div" style={{width:'20rem', height:'4.8rem',overflow:'hidden'}}>
                 {props.data.description}
