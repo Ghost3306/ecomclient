@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import ErrorMsg from '../Errors/ErrorMsg';
 import { SHA256 } from 'crypto-js';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function RegisterSeller() {
   const [businessName, setBusinessName] = useState('');
   // const [uniqueKey, setUniqueKey] = useState('');

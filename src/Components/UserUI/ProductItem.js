@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 function ProductItem(props) {
   const numbers = [ 1, 2, 3, 4,5];
-  
+  const handleClick =()=>{
+    
+    props.setproduct(props.data);
+    props.setstate(false);
+  }
   const addcart =()=>{
     const formdata = new FormData();
     formdata.append('productid',props.data.uniqueid);
@@ -13,7 +17,7 @@ function ProductItem(props) {
       {console.log(props.data)}
        <p>{props.data[0].name}</p> */}
        {/* {console.log(props.data[0].name)} */}
-       <div className="div" style={{height:'16rem',display:'flex',border:'1px solid black'}}>
+       <div className="div" style={{height:'16rem',display:'flex',border:'1px solid black',margin:'10px 0 10px 10px'}} onClick={handleClick}>
           <div className="imageDiv" style={{width:'20%'}}>
             <img src={"http://127.0.0.1:8000/products"+props.data.image1} alt="" style={{width:'90%',margin:'6% 2% 6% 2%',aspectRatio:'1/1',objectFit:'contain'}}/>
           </div>
@@ -23,7 +27,7 @@ function ProductItem(props) {
               <h6>{props.data.name}</h6>
               <div className="div" style={{display:'flex'}}>
                 {numbers.map((element,index)=>{
-                  return <p>{element<=props.data.rating?<span className="fa fa-star checked" style={{color:'orange'}}></span>:<span class="fa fa-star"></span>}</p>
+                  return <p>{element<=props.data.rating?<span className="fa fa-star checked" style={{color:'orange'}}></span>:<span className="fa fa-star"></span>}</p>
 
                 })}
                 <p> ^{props.data.len_review}</p>
