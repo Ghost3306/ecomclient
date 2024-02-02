@@ -145,8 +145,27 @@ export default function Navbar(props) {
                 
 
             </ul>
+                        
+
+            {loginm?<div className="div">
+              <p class="form-control me-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Hello! {cookie.name}</p>
+
+              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                  <h5 id="offcanvasRightLabel">Your Account</h5>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+              <div class="offcanvas-body">
+                  <button type="button" onClick={logout} className="btn btn-info" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
+              </div>
+              </div>
+            </div>    
+            :<form className="d-flex">
+                  <Link to='/login' className="btn btn-primary mx-4">Login</Link>
+       
+            </form>}
               
-              {loginm?<div className="d-flex">
+              {/* {loginm?<div className="d-flex">
               <p className="form-control me-4" onClick={()=>{
                 if(userclk){
                   setclk(false);
@@ -163,7 +182,7 @@ export default function Navbar(props) {
             :<form className="d-flex">
                   <Link to='/login' className="btn btn-primary mx-4">Login</Link>
        
-            </form>}
+            </form>} */}
             
             </div>
             
