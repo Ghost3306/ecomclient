@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ProductItem from './ProductItem';
 import MainProduct from './MainProduct';
-
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 function SearchedProd(props) {
     const [products, setProducts] = useState(null);
     const [prodstate,setState] = useState(true);
     const [mainprod, setMain] = useState(null);
-
-
+    const [cookie, setCookie] = useCookies(['user']);
+    const navigate = useNavigate();
     useEffect(()=>{
         setProducts(props.name)
         
@@ -27,7 +28,9 @@ function SearchedProd(props) {
         </div>}
         
     </div>}
-    {mainprod && <MainProduct data={mainprod}/>}
+
+    {mainprod?cookie.apikey?<MainProduct data={mainprod}/>:navigate('/login'):console.log()}
+    
     </>
     
   )

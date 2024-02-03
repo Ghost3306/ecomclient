@@ -1,9 +1,47 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
+
+
 
 function MainProduct(props) {
+  const [add, setAdd] = useState(null);
+  const [cookie, setCookie] = useCookies(['user']);
+  const [qun,setQuntity] = useState(1);
+  const addcart = async()=>{
+    console.log('adding to cart');
+    const formdata = new FormData();
+    formdata.append('apikey',cookie.apikey);
+    formdata.append('productid',props.data.uniqueid)
+    formdata.append('quntity',qun);
+    try{
+      const res = await axios.post('http://127.0.0.1:8000/users/addcart/',formdata,{
+        headers:{
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+      console.log(res.data);
+
+    }catch(error){
+      console.log(error);
+    }
+    setAdd('product added to your carts')
+    setTimeout(()=>{setAdd(null)},3000)
+  }
+    const plus = ()=>{
+      setQuntity(qun+1);
+    }
+    const minus = ()=>{
+      if(qun===1){
+        setQuntity(1)
+      }else{
+        setQuntity(qun-1)
+      }
+    }
   return (
     <>
     {console.log(props)}
+        
         <div className="container my-4" style={{border:'1px solid black',width:'185vh',height:'auto',display:'flex'}}>
             <div className="images" style={{width:'90vh',border:'1px solid black',display:'flex',alignItems:'center',justifyContent:'center'}}>   
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -47,6 +85,20 @@ function MainProduct(props) {
                 <h5 style={{fontSize:'20px',fontWeight:'500',marginTop:'8px'}}>{props.data.name}</h5>
                 <h4 style={{marginTop:'8px'}}>&#8377; {props.data.price}</h4>
                 <p>Price including all taxes</p>
+                <div className="d-flex justify-content-center my-3" >
+                  <button className='btn btn-primary btn-sm' type="button" onClick={minus}>-</button>
+                  <label className='mx-2'>{qun}</label>
+                  <button className='btn btn-primary btn-sm' type='button' onClick={plus}>+</button>
+                </div>
+                <div className="container d-flex justify-content-center">
+                    <button className='btn btn-primary mx-2'  type="button" onClick={addcart}>Add to Cart</button>
+                    
+                    <button className='btn btn-primary' type="button">Buy Now</button>
+                </div>
+                
+                <div className="container">
+                {add && <p style={{color:'green'}}>{add}</p>}
+                </div>
             </div>
         </div>
     </>

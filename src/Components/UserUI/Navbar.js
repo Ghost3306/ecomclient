@@ -155,7 +155,8 @@ export default function Navbar(props) {
                   <h5 id="offcanvasRightLabel">Your Account</h5>
                   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-              <div class="offcanvas-body">
+              <div class="offcanvas-body text-center">
+                  <Link to="/cart" className="btn btn-outline-primary">Cart</Link>
                   <button type="button" onClick={logout} className="btn btn-info" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
               </div>
               </div>
