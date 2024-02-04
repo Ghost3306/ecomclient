@@ -147,7 +147,7 @@ export default function Navbar(props) {
             </ul>
                         
 
-            {loginm?<div className="div">
+            {loginm!=='logout'?loginm?<div className="div">
               <p class="form-control me-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Hello! {cookie.name}</p>
 
               <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -162,6 +162,9 @@ export default function Navbar(props) {
               </div>
             </div>    
             :<form className="d-flex">
+                  <Link to='/login' className="btn btn-primary mx-4">Login</Link>
+       
+            </form>:<form className="d-flex">
                   <Link to='/login' className="btn btn-primary mx-4">Login</Link>
        
             </form>}

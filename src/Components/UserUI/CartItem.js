@@ -32,8 +32,8 @@ function CartItem(props) {
   
   return (
     <>
-      
-       <div className="div" style={{height:'12rem',display:'flex',margin:'10px 0 10px 10px'}} >
+       
+       {props.data && <div className="div" style={{height:'12rem',display:'flex',margin:'10px 0 10px 10px'}} >
           <div className="imageDiv" style={{width:'20%',height:'100%'}}>
             <img src={"http://localhost:8000/products"+props.data.image} alt="" style={{width:'80%',height:'90%',margin:'6% 2% 6% 2%',aspectRatio:'1/1',objectFit:'contain'}}/>
           </div>
@@ -65,7 +65,7 @@ function CartItem(props) {
             </div>
           </div>
                
-       </div>
+       </div>}
        <hr />
             
     </>
