@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie';
 import CartItem from './CartItem';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function PlaceItem(props) {
     const [cookies,setCookies] = useCookies(['user'])
     const [fullname, setfullname] = useState('');
@@ -13,6 +15,8 @@ function PlaceItem(props) {
     const [cityVillage, setCityVillage] = useState('');
     const [landmark, setLandmark] = useState('');
     const [pincode, setPincode] = useState('');
+    const [msg, setmsg]= useState(null);
+    const navigate = useNavigate()
     useEffect(()=>{
         setfullname(cookies.name);
         setEmail(cookies.email);
@@ -21,6 +25,41 @@ function PlaceItem(props) {
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);
       }
+
+    const placeorder = async()=>{
+        const formdata = new FormData();
+        formdata.append('uuid',cookies.apikey)
+        formdata.append('name',fullname)
+        formdata.append('email',email)
+        formdata.append('phone',phone)
+        formdata.append('state',state)
+        formdata.append('district',district)
+        formdata.append('taluka',taluka)
+        console.log(taluka);
+        formdata.append('city',cityVillage)
+        formdata.append('landmark',landmark)
+        formdata.append('pincode',pincode)
+        formdata.append('totalprice',fullname)
+        formdata.append('totalprice',props.cart.order_total)
+        formdata.append('payment','postpaid')
+        try{
+            const res = await axios.post('http://127.0.0.1:8000/products/orderplaced/',formdata,{
+                headers:{
+                    'Content-Type':'multipart/form-data',
+                }
+            })
+            console.log(res.data);
+            if(res.data.status==='200'){
+                setmsg(res.data.msg)
+                setTimeout(()=>{
+                    navigate('/')
+                },3000)
+            }
+        }catch(error){
+            console.log(error);
+        }
+    
+    }
   return (
     <>
     <div className="container" style={{marginBottom:'5rem'}}>
@@ -116,8 +155,9 @@ function PlaceItem(props) {
                     <div class="accordion-body">
                         <div className="d-flex justify-content-center">
                             <button type="button" className='btn btn-primary mx-3'>Pay Now</button>
-                            <button type="button" className='btn btn-primary'>Cash on Delivery</button>
+                            <button type="button" className='btn btn-primary' onClick={placeorder}>Cash on Delivery</button>
                         </div>
+                        {msg && <h6>{msg}</h6>}
                 </div>
             </div>
         </div>
