@@ -22,9 +22,13 @@ function CartItem(props) {
     const ondelete = ()=>{
         console.log('delete');
         
-        deletecart()
-        props.setid(0)
-        props.setcart();    
+        deletecart();
+
+        props.setid(0);
+        setTimeout(()=>{
+          props.setcart(); 
+        },500)
+           
     }
     const onsave = ()=>{
         console.log('save')

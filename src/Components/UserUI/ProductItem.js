@@ -22,7 +22,7 @@ function ProductItem(props) {
             <img src={"http://127.0.0.1:8000/products"+props.data.image1} alt="" style={{width:'90%',margin:'6% 2% 6% 2%',aspectRatio:'1/1',objectFit:'contain'}}/>
           </div>
           <div className="contentDiv" style={{}}>
-            <div className="content" style={{margin:'6% 2% 6% 2%'}}>
+            <div className="content" style={{margin:'0% 2% 6% 2%'}}>
               <h5>{props.data.sellername}</h5>
               <h6>{props.data.name}</h6>
               <div className="div" style={{display:'flex'}}>

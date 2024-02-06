@@ -209,6 +209,13 @@ const ForgotPass = () => {
             if(res.data.status==='200'){
                 navigate('/login')
             }
+            if(res.data.status==='401'){
+                setmsgState(true)
+                setMsg(res.data.message)
+                setTimeout(() => {
+                    setmsgState(false);
+                }, 2000);
+            }
         }catch(error){
             console.log(error);
         }

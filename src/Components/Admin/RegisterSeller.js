@@ -97,7 +97,7 @@ function RegisterSeller() {
         formdata.append('bussinessemail',businessEmail);
         formdata.append('phone',phone);
         formdata.append('gst',gst);
-        formdata.append('bussimage',businessImage);
+        
         formdata.append('state',state);
         formdata.append('district',district);
         formdata.append('taluka',taluka);
@@ -156,13 +156,7 @@ function RegisterSeller() {
             </div>
 
             <div className="row mt-4">
-                <div className="d-flex flex-row bd-highlight mb-3 col">
-                        <div className="mb-3">
-                            <label htmlFor="formFile" className="form-label">Upload Image of Bussiness Place</label>
-                            <input className="form-control" type="file" id="formFile" onChange={handleFile}/>
-                            <label htmlFor="formFile" className="form-label">Image should be in 1:1 ration for better view</label>
-                        </div>
-                    </div>
+                
                 <div className="col">
                     <div className="form-floating mb-3">
                         <input type="number" value={phone} className="form-control" id="floatingInput3" placeholder="96044xxxxx" onChange={(e) => handleInputChange(e, setPhone)}/>
