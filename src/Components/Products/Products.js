@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
+import IncomingSellerOrders from './IncomingSellerOrders';
 function Products() {
     const [uniqueid,setuid]= useState('');
     const [products, setProducts] = useState(null);
@@ -32,6 +33,8 @@ function Products() {
 
 
 
+
+    
     const onSubmit = (e)=>{
         e.preventDefault();
     }
@@ -282,9 +285,18 @@ function Products() {
                     <td><button type="button" className='btn btn-primary btn-sm' onClick={onupdateclick}>Update</button></td>
                 </tr> 
                 })}
-                
+                <tr>
+                    <th scope="col"><button type="button" className='btn btn-outline-dark'>Prev</button></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"><button type="button" className='btn btn-outline-primary'>Next</button></th>
+                </tr>
             </tbody>
         </table>
+        <IncomingSellerOrders/>
+
 
         {addprod && <div className="container my-3">
                 <form onSubmit={onSubmit}>
