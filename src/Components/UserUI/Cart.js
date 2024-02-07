@@ -23,6 +23,10 @@ function Cart() {
         setCart(res.data)
     }
     useEffect(()=>{
+       
+   
+       
+        document.body.style.overflow = "visible";
         
         try{
             console.log('useeffect');
@@ -34,7 +38,7 @@ function Cart() {
     },[cartid])
   return (
     <>
-        {!place && <div className="div" style={{width:'100%',height:'auto',background:'#f1f3f6',paddingTop:'20px',display:'flex'}}>
+        {!place && <div className="div" style={{width:'100%',background:'#f1f3f6', overflow:'auto',paddingTop:'20px',display:'flex'}}>
             {cart && cart.order_total===0?<div className="container text-center" style={{background:'#fff',width:'80%',boxShadow:'0px 0px 8px grey',display:'block'}}>
                     <img src={cartimage} style={{width:'250px',position:'absolute',left:'50%',transform:'translate(-50%)'}}/>
                     <h4 style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}>It seems like your cart empty</h4>
@@ -42,7 +46,7 @@ function Cart() {
                     <Link style={{position:'absolute',top:'65%',left:'50%',transform:'translate(-50%,-50%)'}} className='btn btn-primary' type="button" to="/">Show Now</Link>
             </div>:console.log()}
             
-            {cart && cart.total!==0?<div className="container" style={{width:'100%',background:'#fff',height:'100%'}}>
+            {cart && cart.total!==0?<div className="container" style={{width:'100%',background:'#fff'}}>
             <Link to="/" className='btn btn-outline-primary my-2'>Back</Link>
                 <div className="div" style={{display:'flex'}}>
                     

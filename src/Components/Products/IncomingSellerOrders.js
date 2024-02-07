@@ -26,7 +26,8 @@ function IncomingSellerOrders() {
             navigate('sellerlogin');
         }else{
             placedorders();
-            console.log('orders',orders.response);
+            console.log('orders placed');
+            
         }
 
 
@@ -34,7 +35,7 @@ function IncomingSellerOrders() {
   return (
     <>
         {/* {orders && } */}
-        <table class="table">
+        {orders && <table className="table">
             <thead>
                 <tr>
                 <th scope="col">ID</th>
@@ -46,21 +47,21 @@ function IncomingSellerOrders() {
                 </tr>
             </thead>
             <tbody>
-                {orders.response && orders.response.map((element,index)=>{
+                {orders && orders.response.map((element,index)=>{
                     return <tr key={index}>
                         <th scope="row">{element.productid}</th>
                         <td>{element.product}</td>
                         <td>{element.name}</td>
                         <td>{element.quantity}</td>
                         <td>{element.price}</td>
-                        <td><button  class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">View</button></td>
+                        <td><button  className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">View</button></td>
 
-                        <div class="offcanvas offcanvas-bottom" style={{height:'70vh',background:'#fff'}} tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-                                <div class="offcanvas-header">
-                                    <h5 class="offcanvas-title" id="offcanvasBottomLabel">{element.product}</h5>
-                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <div className="offcanvas offcanvas-bottom" style={{height:'70vh',background:'#fff'}} tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                                <div className="offcanvas-header">
+                                    <h5 className="offcanvas-title" id="offcanvasBottomLabel">{element.product}</h5>
+                                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
-                                <div class="offcanvas-body small">
+                                <div className="offcanvas-body small">
                                     
                                 </div>
                         </div>
@@ -69,7 +70,7 @@ function IncomingSellerOrders() {
                 })}
                 
             </tbody>
-        </table>
+        </table>}
     </>
     
   )

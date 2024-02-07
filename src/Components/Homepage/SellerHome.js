@@ -18,7 +18,10 @@ function SellerHome() {
 
   return (
     <>
-        <AddProduct/>  
+      <div className="div" style={{overflow:'auto',height:'auto'}}>
+        <AddProduct/> 
+      </div>
+         
     </>
   )
 }

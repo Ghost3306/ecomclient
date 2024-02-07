@@ -142,6 +142,7 @@ function RegisterSeller() {
     <>
     {/* {msgstate &&  <ErrorMsg msg={msg}/>} */}
       <div className="container mt-5 " >
+      <Link  to='/sellerlogin'><h5>Seller Login</h5></Link>
         <form onSubmit={onSubmit}>
           <div className="container-fluid ">
             <h2 className="text-center">Register Seller</h2>
@@ -328,6 +329,7 @@ function RegisterSeller() {
                 <h4 className='text-center' style={{color:'red'}}>Please verify your email to procced</h4>
                 
               </div>}
+              
               
           </div>
         </form>
