@@ -156,8 +156,14 @@ export default function Navbar(props) {
                   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
               <div class="offcanvas-body text-center">
+                <div className="d-flex flex-column bd-highlight mb-3">
                   <Link to="/cart" className="btn btn-outline-primary">Cart</Link>
+                  <Link to="/yourorders" className="btn btn-outline-primary my-3">Your Orders</Link>
                   <button type="button" onClick={logout} className="btn btn-info" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
+                </div>
+                  
+                  
+
               </div>
               </div>
             </div>    

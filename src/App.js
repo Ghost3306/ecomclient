@@ -11,6 +11,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import SellerHome from './Components/Homepage/SellerHome';
 import ForgotPassSeller from './Components/Admin/ForgotPassSeller';
 import Cart from './Components/UserUI/Cart';
+import YourOrders from './Components/UserUI/YourOrders';
 function App() {
   return (
     <>
@@ -25,7 +26,9 @@ function App() {
         <Route path='/sellerhome' element={<SellerHome/>}/>
         <Route path='/forgotseller' element={<ForgotPassSeller/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/yourorders' element={<YourOrders/>}/>
         <Route path="*" element={<NoPage/>} />
+
       </Routes>
     </BrowserRouter>
       
