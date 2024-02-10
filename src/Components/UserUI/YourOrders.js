@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import YourOrderCompo from './SubUI/YourOrderCompo'
-import { Link, Route, } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import DeliveredYourOrders from './SubUI/DeliveredYourOrders';
 import CancelledYourOrders from './SubUI/CancelledYourOrders';
 import InTransitYourOrders from './SubUI/InTransitYourOrders';
 
-function YourOrders() {
+function YourOrders(props) {
     const [divState,setState] = useState('all');
     useState(()=>{
         document.body.style.overflow = "visible";
@@ -15,15 +15,18 @@ function YourOrders() {
     <div className="container" style={{width:'80%',height:'auto',position:'relative',left:'10%',marginTop:'2%',marginBottom:'2%'}}>
         <h4>Your Orders</h4>
         <table className="table" style={{width:'50vh',marginTop:'3%'}}>
-            <tr>
-                <td><Link onClick={()=>{setState('all')}}>Orders</Link></td>
-                <td><Link onClick={()=>{setState('delivered')}} >Delivered</Link></td>
-                <td><Link onClick={()=>{setState('cancelled')}}>Cancelled</Link></td>
-                <td><Link onClick={()=>{setState('intransit')}}>In-Transit</Link></td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td><Link onClick={()=>{setState('all')}}>Orders</Link></td>
+                    <td><Link onClick={()=>{setState('delivered')}} >Delivered</Link></td>
+                    <td><Link onClick={()=>{setState('cancelled')}}>Cancelled</Link></td>
+                    <td><Link onClick={()=>{setState('intransit')}}>In-Transit</Link></td>
+                </tr>
+            </tbody>
+            
         </table>
             {divState && divState==='all' ?<div className="container">
-                    <YourOrderCompo/>
+                    <YourOrderCompo />
                 </div>:console.log()}
             {divState && divState==='delivered' ?<div className="container">
                 <DeliveredYourOrders/>

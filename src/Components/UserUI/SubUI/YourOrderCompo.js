@@ -31,9 +31,9 @@ function YourOrderCompo() {
     {/* {products && console.log(products.response)} */}
         <div className="div" style={{width:'80%'}}>
             {products && products.map((element,index)=>{
-                {console.log('product',products)}
+              
                 
-                return <YourOrderDetail data={element}/>
+                return <div className="div" key={index}><YourOrderDetail fetch={fetch} data={element} state="all"/></div>
             })}
         </div>
 

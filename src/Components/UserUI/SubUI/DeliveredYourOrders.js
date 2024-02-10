@@ -33,7 +33,7 @@ function DeliveredYourOrders() {
             {products && products.map((element,index)=>{
                 {console.log('testing',element)}
                 if(element.delstatus==="delivered"){
-                  return <YourOrderDetail data={element}/>
+                  return <div className="div" key={index}><YourOrderDetail data={element} state="delivered"/></div>
                 }
             })}
         </div>

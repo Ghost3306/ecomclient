@@ -34,7 +34,7 @@ function CancelledYourOrders() {
             {products && products.map((element,index)=>{
                 {console.log('testing',element)}
                 if(element.delstatus==="cancelled"){
-                  return <YourOrderDetail data={element}/>
+                  return <div className="div" key={index}><YourOrderDetail data={element} state="cancelled"/></div>
                 }
             })}
         </div>
