@@ -2,12 +2,23 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import OffCanvasOrders from './MiniCompoProduct/OffCanvasOrders';
 function IncomingSellerOrders() {
+    const [off,setOff]=useState(false);
+    const [orderid,setid]=useState(null);
+    const setdiv=()=>{
+        
+        if(off){
+            setOff(false);
+        }else{
+            setOff(true)
+        }
+    }
     async function placedorders(){
         try{
             const formdata = new FormData();
             formdata.append('seller',cookie.sellerapikey)
-            const res = await axios.post('http://127.0.0.1:8000/products/sellerorders/',formdata,{
+            const res = await axios.post('http://127.0.0.1:8000/products/sellerordersNone/',formdata,{
                 headers:{
                     "Content-Type":'multipart/form-data',
                 }
@@ -34,7 +45,7 @@ function IncomingSellerOrders() {
     },[])
   return (
     <>
-        {/* {orders && } */}
+       <h5>Incoming Orders</h5>
         {orders && <table className="table">
             <thead>
                 <tr>
@@ -48,29 +59,29 @@ function IncomingSellerOrders() {
             </thead>
             <tbody>
                 {orders && orders.response.map((element,index)=>{
+                    
                     return <tr key={index}>
+                       
                         <th scope="row">{element.productid}</th>
                         <td>{element.product}</td>
                         <td>{element.name}</td>
                         <td>{element.quantity}</td>
                         <td>{element.price}</td>
-                        <td><button  className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">View</button></td>
+                        <td><button  className="btn btn-primary" type="button" onClick={()=>{
+                            setid(element.uid);
+                            setdiv(true);
+                        }} >View</button></td>
 
-                        <div className="offcanvas offcanvas-bottom" style={{height:'70vh',background:'#fff'}} tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-                                <div className="offcanvas-header">
-                                    <h5 className="offcanvas-title" id="offcanvasBottomLabel">{element.product}</h5>
-                                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                </div>
-                                <div className="offcanvas-body small">
-                                    
-                                </div>
-                        </div>
+                        
                     </tr>
                     
                 })}
                 
             </tbody>
         </table>}
+        {off && <div className="div" style={{position:'relative',top:'50%',left:'60%',transform:'translate(-50%,-50%)',background:'#fff'}}>
+            <OffCanvasOrders setdiv={setdiv} id={orderid}/>
+        </div>}
     </>
     
   )

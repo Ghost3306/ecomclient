@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import Products from './Products';
@@ -26,6 +26,10 @@ function AddProduct() {
     const [productstate,setState] = useState(true);
     const [reload ,setOnReload] = useState(true);
 
+    
+    useEffect(()=>{
+        return setCookie('sellerapikey',cookies.sellerapikey,{path:'/'})
+    })
     const logout =()=>{
         setCookie('sellerapikey','logout',{ path: '/' });
         setCookie('name','logout',{ path: '/' });
@@ -112,7 +116,13 @@ function AddProduct() {
                 <h3 className='my-4'>Seller Dashboard</h3>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
-                <button type="button" style={{color:'#fff'}} className='btn btn-info' onClick={logout}>logout</button>
+                <Link type="button" to="sellerhistory"  className='btn btn-outline-info' onClick={logout}>History</Link>
+            </div>
+            <div className="p-2 flex-shrink-1 bd-highlight">
+            <Link type="button" to="sellerallprod"  className='btn btn-outline-info btn-sm' onClick={logout}>All Orders</Link>
+            </div>
+            <div className="p-2 flex-shrink-1 bd-highlight">
+                <button type="button" style={{color:'#fff'}} className='btn btn-info btn-lg' onClick={logout}>logout</button>
             </div>
         </div>
             

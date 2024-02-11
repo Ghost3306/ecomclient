@@ -53,19 +53,11 @@ function SellerLogin() {
 
     function setdata(res){
         try{
-            if(rememberMe){
-                console.log(res);
-                setCookie('remember',true,{ path: '/' });
-                setCookie('sellerapikey',res.uniquekey,{ path: '/' });
-                setCookie('name',res.name,{ path: '/' });
-                setCookie('email',res.email,{ path: '/' })
-            }else{
-                setCookie('remember',false,{ path: '/' });
-                setCookie('sellerapikey',res.uniquekey,{ path: '/' });
-                setCookie('name',res.name,{ path: '/' });
-                setCookie('email',res.email,{ path: '/' })
-            }
-            
+            console.log(res);
+            setCookie('remember',true,{ path: '/' });
+            setCookie('sellerapikey',res.uniquekey,{ path: '/' });
+            setCookie('name',res.name,{ path: '/' });
+            setCookie('email',res.email,{ path: '/' })
             
         }catch(error){
             console.log(error);
