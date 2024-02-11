@@ -28,7 +28,7 @@ function AddProduct() {
 
     
     useEffect(()=>{
-        return setCookie('sellerapikey',cookies.sellerapikey,{path:'/'})
+        // return setCookie('sellerapikey',cookies.sellerapikey,{path:'/'})
     })
     const logout =()=>{
         setCookie('sellerapikey','logout',{ path: '/' });
@@ -116,10 +116,10 @@ function AddProduct() {
                 <h3 className='my-4'>Seller Dashboard</h3>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
-                <Link type="button" to="sellerhistory"  className='btn btn-outline-info' onClick={logout}>History</Link>
+                <Link type="button" to="sellerhistory"  className='btn btn-outline-info' >History</Link>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
-            <Link type="button" to="sellerallprod"  className='btn btn-outline-info btn-sm' onClick={logout}>All Orders</Link>
+            <Link type="button" to="sellerallprod"  className='btn btn-outline-info btn-sm' >All Orders</Link>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
                 <button type="button" style={{color:'#fff'}} className='btn btn-info btn-lg' onClick={logout}>logout</button>
