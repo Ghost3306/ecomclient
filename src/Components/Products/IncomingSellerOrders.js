@@ -43,6 +43,9 @@ function IncomingSellerOrders() {
 
 
     },[])
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
   return (
     <>
        <h5>Incoming Orders</h5>
@@ -53,6 +56,7 @@ function IncomingSellerOrders() {
                 <th scope="col">Product Name</th>
                 <th scope="col">Customer</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">delivery status</th>
                 <th scope="col">Price</th>
                 <th scope="col">View</th>
                 </tr>
@@ -66,6 +70,7 @@ function IncomingSellerOrders() {
                         <td>{element.product}</td>
                         <td>{element.name}</td>
                         <td>{element.quantity}</td>
+                        <td>{capitalizeFirstLetter(element.delstatus)}</td>
                         <td>{element.price}</td>
                         <td><button  className="btn btn-primary" type="button" onClick={()=>{
                             setid(element.uid);
@@ -80,7 +85,7 @@ function IncomingSellerOrders() {
             </tbody>
         </table>}
         {off && <div className="div" style={{position:'relative',top:'50%',left:'60%',transform:'translate(-50%,-50%)',background:'#fff'}}>
-            <OffCanvasOrders setdiv={setdiv} id={orderid}/>
+            <OffCanvasOrders setdiv={setdiv} setOrders={placedorders} id={orderid}/>
         </div>}
     </>
     

@@ -140,7 +140,7 @@ export default function Navbar(props) {
 
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link" to="/registerseller">Became a Seller!</Link>
+                <Link className="nav-link" to="/sellerads">Became a Seller!</Link>
                 </li>
                 
 
@@ -157,8 +157,12 @@ export default function Navbar(props) {
                 </div>
               <div class="offcanvas-body text-center">
                 <div className="d-flex flex-column bd-highlight mb-3">
-                  <Link to="/cart" className="btn btn-outline-primary">Cart</Link>
+                  <Link to="/cart" className="btn btn-outline-primary my-3">Cart</Link>
                   <Link to="/yourorders" className="btn btn-outline-primary my-3">Your Orders</Link>
+                  <Link to="/reviews" className="btn btn-outline-primary my-3">Reviews</Link>
+                  <Link to="/savelater" className="btn btn-outline-primary my-3">Save Later</Link>
+                  <Link to="/buyagain" className="btn btn-outline-primary my-3">Buy Again</Link>
+                  <Link to="/account" className="btn btn-outline-primary my-3">Your account</Link>
                   <button type="button" onClick={logout} className="btn btn-info" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
                 </div>
                   

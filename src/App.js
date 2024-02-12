@@ -14,6 +14,7 @@ import Cart from './Components/UserUI/Cart';
 import YourOrders from './Components/UserUI/YourOrders';
 import HistorySeller from './Components/Products/HistorySeller';
 import AllSellerProducts from './Components/Products/AllSellerProducts';
+import SellerAds from './Components/Homepage/SellerAds';
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
         <Route path='/forgotseller' element={<ForgotPassSeller/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/yourorders' element={<YourOrders/>}/>
+        <Route path='/sellerads' element={<SellerAds/>}/>
         <Route path='/sellerhome/sellerhistory' element={<HistorySeller/>}/>
         <Route path='/sellerhome/sellerallprod' element={<AllSellerProducts/>}/>
         <Route path="*" element={<NoPage/>} />

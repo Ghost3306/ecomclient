@@ -71,6 +71,9 @@ function YourOrderDetail(props) {
                 <div className="p-1 bd-highlight mx-1">
                     <p>SHIP TO<br/>Lalit Rawool</p>
                 </div>
+                {det.delstatus==='intransit' || det.delstatus==='delivered'?<div className="p-1 bd-highlight mx-1">
+                    <p>COURIER<br/>{det.couriername}</p>
+                </div>:console.log()}
                 
                 <div className="ms-auto  bd-highlight" >
                 {props.data.delstatus==='intransit' || props.data.delstatus==='accepted' || props.data.delstatus==='dispatching'?<button className="btn btn-primary btn-sm" type="button"  onClick={()=>{setdel(true)}}>Cancel</button>:console.log()}

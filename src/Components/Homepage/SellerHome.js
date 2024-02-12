@@ -8,9 +8,10 @@ function SellerHome() {
   const [cookie,setCookie] = useCookies(['user'])
   const navigate = useNavigate();
   useEffect(()=>{
-    if(cookie.email==='logout'){
+    document.body.style.overflow = "visible";
+    if(cookie.sellerapikey==='logout'){
       navigate('/sellerlogin')
-    }else if(!cookie.email){
+    }else if(!cookie.sellerapikey){
       navigate('/sellerlogin')
     }
   },[])
