@@ -32,6 +32,13 @@ function YourOrderDetail(props) {
                 h3: 'red'
               };
             setColor(newJsonData);
+        }else if(props.data.delstatus==='dispatching'){
+            const newJsonData = {
+                h1: 'green',
+                h2: 'red',
+                h3: 'red'
+              };
+            setColor(newJsonData);
         }
         
     },[])
@@ -63,13 +70,13 @@ function YourOrderDetail(props) {
         <div className="card-header">
             <div className="d-flex bd-highlight " style={{height:'50px'}}>
                 <div className="p-1 bd-highlight mx-1">
-                    <p>ORDER PLACED<br/>5 Jan 2024</p>     
+                    <p>ORDER PLACED<br/>{det.date}</p>     
                 </div>
                 <div className="p-1 bd-highlight mx-1">      
                     <p>TOTAL<br/>&#8377; 550</p> 
                 </div>
                 <div className="p-1 bd-highlight mx-1">
-                    <p>SHIP TO<br/>Lalit Rawool</p>
+                    <p>SHIP TO<br/>{det.name}</p>
                 </div>
                 {det.delstatus==='intransit' || det.delstatus==='delivered'?<div className="p-1 bd-highlight mx-1">
                     <p>COURIER<br/>{det.couriername}</p>
@@ -78,7 +85,7 @@ function YourOrderDetail(props) {
                 <div className="ms-auto  bd-highlight" >
                 {props.data.delstatus==='intransit' || props.data.delstatus==='accepted' || props.data.delstatus==='dispatching'?<button className="btn btn-primary btn-sm" type="button"  onClick={()=>{setdel(true)}}>Cancel</button>:console.log()}
 
-                    <p>ORDER ID : {det.uid}</p>
+                    <p>ORDER ID : {det.uid.toUpperCase()}</p>
                     
                 </div>
                 

@@ -18,7 +18,7 @@ function CartItem(props) {
     console.log('delete cart');
     
     
-}
+    }
     const ondelete = ()=>{
         console.log('delete');
         
@@ -30,8 +30,31 @@ function CartItem(props) {
         },500)
            
     }
+
+    async function savelater(){
+      const formdata = new FormData();
+      console.log(props.data.id);
+      formdata.append('id',props.data.id);
+      const res = await axios.post('http://127.0.0.1:8000/users/savelater/',formdata,{
+          headers:{
+              'Content-Type': 'multipart/form-data',
+          }
+      })
+      console.log(res.data);
+      console.log('save later');
+      
+      
+      }
+
     const onsave = ()=>{
-        console.log('save')
+      console.log('save');
+        
+      savelater();
+
+      props.setid(0);
+      setTimeout(()=>{
+        props.setcart(); 
+      },500)
     }
   
   return (

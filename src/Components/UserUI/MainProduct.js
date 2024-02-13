@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie';
+import BuyNow from './BuyNow';
 
 
 
@@ -8,6 +9,7 @@ function MainProduct(props) {
   const [add, setAdd] = useState(null);
   const [cookie, setCookie] = useCookies(['user']);
   const [qun,setQuntity] = useState(1);
+  const [maindiv,setDiv] = useState(true)
   const addcart = async()=>{
     console.log('adding to cart');
     const formdata = new FormData();
@@ -42,7 +44,7 @@ function MainProduct(props) {
     <>
     {console.log(props)}
         
-        <div className="container my-4" style={{border:'1px solid black',width:'185vh',height:'auto',display:'flex'}}>
+        {maindiv && <div className="container my-4" style={{border:'1px solid black',width:'185vh',height:'auto',display:'flex'}}>
             <div className="images" style={{width:'90vh',border:'1px solid black',display:'flex',alignItems:'center',justifyContent:'center'}}>   
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -93,14 +95,15 @@ function MainProduct(props) {
                 <div className="container d-flex justify-content-center">
                     <button className='btn btn-primary mx-2'  type="button" onClick={addcart}>Add to Cart</button>
                     
-                    <button className='btn btn-primary' type="button">Buy Now</button>
+                    <button className='btn btn-primary' type="button" onClick={()=>{setDiv(false)}}>Buy Now</button>
                 </div>
                 
                 <div className="container">
                 {add && <p style={{color:'green'}}>{add}</p>}
                 </div>
             </div>
-        </div>
+        </div>}
+        {!maindiv && <BuyNow quntity={qun} setdiv={setDiv} data={props.data}/>}
     </>
     
   )

@@ -15,6 +15,7 @@ import YourOrders from './Components/UserUI/YourOrders';
 import HistorySeller from './Components/Products/HistorySeller';
 import AllSellerProducts from './Components/Products/AllSellerProducts';
 import SellerAds from './Components/Homepage/SellerAds';
+import SaveLater from './Components/UserUI/SaveLater';
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
         <Route path='/sellerads' element={<SellerAds/>}/>
         <Route path='/sellerhome/sellerhistory' element={<HistorySeller/>}/>
         <Route path='/sellerhome/sellerallprod' element={<AllSellerProducts/>}/>
+        <Route path='/savelater' element={<SaveLater/>}/>
         <Route path="*" element={<NoPage/>} />
 
       </Routes>
