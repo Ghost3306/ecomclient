@@ -6,6 +6,24 @@ import { Link } from 'react-router-dom'
 function HistorySeller() {
   const [cookie,setCookie] = useCookies(['user']);
   const [data,setData] = useState(null);
+  const [search,setsearch] = useState('')
+  const searchHistory= async()=>{
+    const formdata = new FormData()
+    formdata.append('name',search)
+    formdata.append('forwhat','delivered')
+    formdata.append('seller',cookie.sellerapikey)
+    try{
+        const res = await axios.post('http://127.0.0.1:8000/products/search/',formdata,{
+          headers:{
+            'Content-Type':'multipart/form-data'
+          }
+        })
+        console.log(res.data);
+        setData(res.data)
+    }catch(error){
+      console.log(error);
+    }
+  }
   async function fetch(){
     const formdata = new FormData();
     formdata.append('seller',cookie.sellerapikey)
@@ -31,7 +49,19 @@ function HistorySeller() {
         <Link type="button" to="/sellerhome" className='btn btn-outline-info'>Home</Link>
       </div>
     </div>
-    <h5>Your Delivered Products History</h5>
+    
+    <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex" onSubmit={(e)=>{e.preventDefault()}}>
+    <h5 className='me-2'>Your Delivered Products History</h5>
+      <input class="form-control me-2" value={search} onChange={(e)=>{
+        setsearch(e.target.value);
+        
+      }} type="search" placeholder="Search" aria-label="Search"/>
+      <button class="btn btn-outline-success" type="submit" onClick={searchHistory}>Search</button>
+    </form>
+  </div>
+</nav>
     {data && <table class="table table-bordered">
       {console.log(data)}
       <thead>
