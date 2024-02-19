@@ -25,7 +25,31 @@ function AddProduct() {
 
     const [productstate,setState] = useState(true);
     const [reload ,setOnReload] = useState(true);
-
+    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked1, returnav] = useState(false);
+    const [isChecked3, special] = useState(false);
+    const [color, setcolor] = useState('');
+    const [warrenty, setwarrenty] = useState('');
+    const [country, setcountry] = useState('');
+    const [returndays, setdays] = useState(null);
+    const [specialdes, setspecialday] = useState(null);
+    const handleCheckboxChange = (event) => {
+        if(isChecked){
+            setIsChecked(false)
+        }else{
+            setIsChecked(true)
+        }
+      console.log(isChecked);
+      
+    };  
+    const handleCheckboxChange1 = (event) => {
+        returnav(!isChecked1);
+        console.log(isChecked1);
+      };
+    const handleCheckboxChange3 = (event) => {
+        special(!isChecked3);
+        console.log(isChecked3);
+      };
     
     useEffect(()=>{
         // return setCookie('sellerapikey',cookies.sellerapikey,{path:'/'})
@@ -93,6 +117,16 @@ function AddProduct() {
         formdata.append('image3',image3);
         formdata.append('image4',image4);
         formdata.append('image5',image5);
+        formdata.append('color',color);
+        formdata.append('warrenty',warrenty);
+        formdata.append('country',country)
+        formdata.append('payondel',isChecked1)
+        if(isChecked){
+            formdata.append('returndays',returndays);
+        }
+        if(isChecked3){
+            formdata.append('special',specialdes);
+        }
         try{
             const res = await axios.post('http://127.0.0.1:8000/products/addproduct/',formdata,{
                 headers:{
@@ -217,6 +251,54 @@ function AddProduct() {
                         </div>
                     </div>
 
+                </div>
+                <div className="row my-3">
+                    <div className="col">
+                        <input class="form-control" value={color} onChange={(e)=>{setcolor(e.target.value)}} type="text" placeholder="Color"/>
+                    </div>
+                    <div className="col">
+                        <input class="form-control" value={country} onChange={(e)=>{setcountry(e.target.value)}} type="text" placeholder="Coutry of Origin"/>
+                    </div>
+                    <div className="col">
+                        <input class="form-control" value={warrenty} onChange={(e)=>{setwarrenty(e.target.value)}} type="text" placeholder="Warrenty"/>
+                    </div>
+                </div>
+
+                <div className="row my-3">
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked} onChange={handleCheckboxChange}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Return Available
+                            </label>
+                            {isChecked && <div className="col">
+                            <input class="form-control my-2" value={returndays} type="number" onChange={(e)=>{setdays(e.target.value)}} placeholder="Enter return available days"/>
+                            </div>}
+                        </div> 
+                    </div>
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked1} onChange={handleCheckboxChange1}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Pay on Delivery
+                            </label>
+                            
+                        </div> 
+                    </div>
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked3} onChange={handleCheckboxChange3}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Special Description
+                            </label>
+                            {isChecked3 && <div className="col">
+                            <div class="form-group my-2">
+                                <label for="exampleFormControlTextarea1">Enter</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" value={specialdes} rows="3"></textarea>
+                            </div>
+                            </div>}
+                        </div> 
+                    </div>
                 </div>
                 <div className="container-fluid my-3">
                     <p>Enter Product Images : </p>

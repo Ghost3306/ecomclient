@@ -217,6 +217,15 @@ function Products() {
                 </div>
             </div>
             <div className="row">
+                <div className="col">
+                    <p>Special Description : {popdata.special}</p>
+                </div>
+            </div>
+
+
+
+
+            <div className="row">
                 <div className="col" >
                     <img style={{width:'150px',height:'150px',border:'1px solid black'}} src={'http://127.0.0.1:8000/products'+popdata.image1} alt="image" onClick={()=>{setImage(true); setImagepath('http://127.0.0.1:8000/products'+popdata.image1); setPop(false)}}  />
                 </div>
