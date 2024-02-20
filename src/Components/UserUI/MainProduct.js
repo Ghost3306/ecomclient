@@ -2,7 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie';
 import BuyNow from './BuyNow';
-
+import replacement from './svg/replacement.png'
+import warrenty from './svg/warranty.png'
+import cod from './svg/cash-on-delivery.png'
 
 
 function MainProduct(props) {
@@ -97,12 +99,87 @@ function MainProduct(props) {
                     
                     <button className='btn btn-primary' type="button" onClick={()=>{setDiv(false)}}>Buy Now</button>
                 </div>
-                
+                <div class="d-flex justify-content-evenly mx-2 my-4">
+                  <div class="" >
+                    <img src={replacement} style={{width:'40px'}} class="card-img-top" alt="..."/>
+                    <div class="">
+                      <p class="card-text">{props.data.returndays} Days Replacement</p>
+                    </div>
+                  </div>
+
+                  <div class="" >
+                    <img src={cod} style={{width:'40px'}} class="card-img-top" alt="..."/>
+                    <div class="">
+                      <p class="card-text">{props.data.payondel?'Pay on Delivery':'No pay on delivery'}</p>
+                    </div>
+                  </div>
+
+                  <div class="" >
+                    <img src={warrenty} style={{width:'40px'}} class="card-img-top" alt="..."/>
+                    <div class="">
+                      <p class="card-text">{props.data.warrenty} Warrenty</p>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="row mx-2">
+                  <div className="col">
+                    <p>Special Description : {props.data.special}</p>
+                  </div>
+                </div>
+                <div className="row mx-2">
+                  <div className="col">
+                    <p>Color : {props.data.color}</p>
+                  </div>
+                  <div className="col">
+                    <p>Country of origin: {props.data.country}</p>
+                  </div>
+                </div>
                 <div className="container">
+                <div className="review">
+          <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Reviews
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <h6>Username</h6>
+                    <h5>5 Star</h5>
+                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
+                  </div>
+                  {/* <div class="accordion-body">
+                    <h6>Username</h6>
+                    <h5>5 Star</h5>
+                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
+                  </div>
+                  <div class="accordion-body">
+                    <h6>Username</h6>
+                    <h5>5 Star</h5>
+                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
+                  </div>
+                  <div class="accordion-body">
+                    <h6>Username</h6>
+                    <h5>5 Star</h5>
+                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
+                  </div> */}
+                </div>
+              </div>
+              
+            </div>
+          </div>
                 {add && <p style={{color:'green'}}>{add}</p>}
                 </div>
             </div>
-        </div>}
+          
+
+        </div>
+          
+
+        }
+
         {!maindiv && <BuyNow quntity={qun} setdiv={setDiv} data={props.data}/>}
     </>
     

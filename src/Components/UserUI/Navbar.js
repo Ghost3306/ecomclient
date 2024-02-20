@@ -32,11 +32,14 @@ export default function Navbar(props) {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
-
+    const id = setTimeout(()=>{
+      handlleChange();
+    },800)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      clearTimeout(id);
     };
-  }, []);
+  }, [inputValue]);
 
   const logout =()=>{
     setCookie('name',null,{ path: '/' });
@@ -44,7 +47,7 @@ export default function Navbar(props) {
     setLoginNm(null);
   }
   const handlleChange = async (event) => {
-    setInputValue(event.target.value);
+    // setInputValue(event.target.value);
     const formdata = new FormData();
     if (inputValue.length === 1) {
       setRes(null);
@@ -113,7 +116,7 @@ export default function Navbar(props) {
                 <li className="nav-item">
                 <div >
                     <form className="d-flex" onSubmit={(e)=>{e.preventDefault()}}>
-                        <input type="text" className="form-control me-2" value={inputValue} placeholder="Search eg. earthen pots" onChange={handlleChange} ref={inputRef} style={{width:'25rem'}} onFocus={handleInputFocus}/>
+                        <input type="text" className="form-control me-2" value={inputValue} placeholder="Search eg. earthen pots" onChange={(e)=>{setInputValue(e.target.value)}} ref={inputRef} style={{width:'25rem'}} onFocus={handleInputFocus}/>
                         <button type="submit"  className="btn btn-outline-success" onClick={handleSearch}>Search</button>
                     </form>
                     

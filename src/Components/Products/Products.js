@@ -113,7 +113,29 @@ function Products() {
             console.log(error);
         }
     }
-
+    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked1, returnav] = useState(false);
+    const [isChecked3, special] = useState(false);
+    const [color, setcolor] = useState('');
+    const [warrenty, setwarrenty] = useState('');
+    const [country, setcountry] = useState('');
+    const [returndays, setdays] = useState(null);
+    const [specialdes, setspecialday] = useState(null);
+    const handleCheckboxChange = (event) => {
+        setIsChecked(!isChecked)
+      console.log(isChecked);
+      
+    };  
+    const handleCheckboxChange1 = (event) => {
+    returnav(!isChecked1);
+        console.log(isChecked1);
+      };
+    const handleCheckboxChange3 = (event) => {
+        console.log(isChecked3);
+    special(!isChecked3);
+        
+      };
+    
     
 
     const updateproduct= async()=>{
@@ -133,6 +155,12 @@ function Products() {
         formdata.append('image3',image3);
         formdata.append('image4',image4);
         formdata.append('image5',image5);
+        formdata.append('color',color);
+        formdata.append('warrenty',warrenty);
+        formdata.append('country',country)
+        formdata.append('payondel',isChecked1)
+        formdata.append('special',specialdes);
+        formdata.append('returndays',returndays);
         try{
             const res = await axios.post('http://127.0.0.1:8000/products/updateproduct/',formdata,{
                 headers:{
@@ -178,7 +206,7 @@ function Products() {
             
         </div>}
 
-        {pop && <div className="container" style={{position:'absolute', top:'50%',left:'50%',transform:'translate(-50%,-50%)', border:'1px solid black', width:'1000px',height:'550px', background:'#fff' }} >
+        {pop && <div className="container" style={{position:'absolute', top:'50%',left:'50%',transform:'translate(-50%,-50%)', border:'1px solid black', width:'1000px',height:'700px', background:'#fff' }} >
             <div className="d-flex justify-content-between my-3">
                 <h4>Product Details</h4>
                 <button type="button" className='btn btn-danger btn-sm' onClick={popclick}>x</button>
@@ -214,6 +242,29 @@ function Products() {
                 </div>
                 <div className="col">
                     <p>Length : {popdata.length}</p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <p>Color : {popdata.color}</p>
+                </div>
+                <div className="col">
+                    <p>Country of origin : {popdata.country}</p>
+                </div>
+                <div className="col">
+                    <p>Warrenty : {popdata.warrenty}</p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <p>Return : {popdata.returndays}</p>
+                </div>
+                <div className="col">
+                    {console.log(popdata.payondel)}
+                    <p>pay on delivery : {popdata.payondel?'True':'False'}</p>
+                </div>
+                <div className="col">
+                    <p>Special Description : {popdata.specialdes}</p>
                 </div>
             </div>
             <div className="row">
@@ -396,6 +447,55 @@ function Products() {
                         </div>
                     </div>
 
+                </div>
+
+                <div className="row my-3">
+                    <div className="col">
+                        <input class="form-control" value={color} onChange={(e)=>{setcolor(e.target.value)}} type="text" placeholder="Color"/>
+                    </div>
+                    <div className="col">
+                        <input class="form-control" value={country} onChange={(e)=>{setcountry(e.target.value)}} type="text" placeholder="Coutry of Origin"/>
+                    </div>
+                    <div className="col">
+                        <input class="form-control" value={warrenty} onChange={(e)=>{setwarrenty(e.target.value)}} type="text" placeholder="Warrenty"/>
+                    </div>
+                </div>
+
+                <div className="row my-3">
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked} onChange={handleCheckboxChange}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Return Available
+                            </label>
+                            {isChecked && <div className="col">
+                            <input class="form-control my-2" value={returndays} type="number" onChange={(e)=>{setdays(e.target.value)}} placeholder="Enter return available days"/>
+                            </div>}
+                        </div> 
+                    </div>
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked1} onChange={handleCheckboxChange1}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Pay on Delivery
+                            </label>
+                            
+                        </div> 
+                    </div>
+                    <div className="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={isChecked3} onChange={handleCheckboxChange3}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Special Description
+                            </label>
+                            {isChecked3 && <div className="col">
+                            <div class="form-group my-2">
+                                <label for="exampleFormControlTextarea1">Enter</label>
+                                <input type='text' class="form-control" id="exampleFormControlTextarea1" value={specialdes} onChange={(e)=>{setspecialday(e.target.value)}}/>
+                            </div>
+                            </div>}
+                        </div> 
+                    </div>
                 </div>
                 <div className="container-fluid my-3">
                     <p>Reupload Images Before Procced : </p>

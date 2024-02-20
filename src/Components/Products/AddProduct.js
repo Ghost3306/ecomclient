@@ -34,21 +34,18 @@ function AddProduct() {
     const [returndays, setdays] = useState(null);
     const [specialdes, setspecialday] = useState(null);
     const handleCheckboxChange = (event) => {
-        if(isChecked){
-            setIsChecked(false)
-        }else{
-            setIsChecked(true)
-        }
+        setIsChecked(!isChecked)
       console.log(isChecked);
       
     };  
     const handleCheckboxChange1 = (event) => {
-        returnav(!isChecked1);
+    returnav(!isChecked1);
         console.log(isChecked1);
       };
     const handleCheckboxChange3 = (event) => {
-        special(!isChecked3);
         console.log(isChecked3);
+    special(!isChecked3);
+        
       };
     
     useEffect(()=>{
@@ -121,12 +118,9 @@ function AddProduct() {
         formdata.append('warrenty',warrenty);
         formdata.append('country',country)
         formdata.append('payondel',isChecked1)
-        if(isChecked){
-            formdata.append('returndays',returndays);
-        }
-        if(isChecked3){
-            formdata.append('special',specialdes);
-        }
+        formdata.append('special',specialdes);
+        formdata.append('returndays',returndays);
+        
         try{
             const res = await axios.post('http://127.0.0.1:8000/products/addproduct/',formdata,{
                 headers:{
@@ -294,7 +288,7 @@ function AddProduct() {
                             {isChecked3 && <div className="col">
                             <div class="form-group my-2">
                                 <label for="exampleFormControlTextarea1">Enter</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" value={specialdes} rows="3"></textarea>
+                                <input type='text' class="form-control" id="exampleFormControlTextarea1" value={specialdes} onChange={(e)=>{setspecialday(e.target.value)}}/>
                             </div>
                             </div>}
                         </div> 
