@@ -144,6 +144,9 @@ function AddProduct() {
                 <h3 className='my-4'>Seller Dashboard</h3>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
+                <Link type="button" to="banner"  className='btn btn-outline-info' >Banner</Link>
+            </div>
+            <div className="p-2 flex-shrink-1 bd-highlight">
                 <Link type="button" to="sellerhistory"  className='btn btn-outline-info' >History</Link>
             </div>
             <div className="p-2 flex-shrink-1 bd-highlight">
