@@ -1,36 +1,70 @@
-import React from 'react'
-
+import axios from 'axios';
+import React, { useState } from 'react'
+import { useEffect } from 'react';
 function Carousel() {
+    const [data,setBanners] = useState(null);
+    async function fetch(){
+        const formdata = new FormData()
+        const res = await axios.post('http://127.0.0.1:8000/seller/showbanner/',formdata,{
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        })
+        setBanners(res.data);
+        
+    }
+    useEffect(()=>{
+        try{
+            fetch();
+        }catch(error){
+            console.log(error);
+        }
+    },[])
   return (
     <>
-        <div  id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
+    {data && console.log(data.banners.length)}
+        {data && <div  id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                
             </div>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                <img src="https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/63692356b67b60ef.jpeg?q=20" className="d-block w-100" alt="..."/>
+                <img src={"http://127.0.0.1:8000/seller"+data.banners[0].banner} className="d-block w-100" alt="..."/>
                 <div className="carousel-caption d-none d-md-block">
-                    {/* <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p> */}
+                    
+                </div>
+                </div>
+                {data.banners.slice(1).map((element,index)=>{
+                    return <div className="carousel-item ">
+                    <img src={"http://127.0.0.1:8000/seller"+element.banner}  className="d-block w-100" alt="..."/>
+                    <div className="carousel-caption d-none d-md-block">
+                       
+                    </div>
+                    </div>
+                })}
+
+                {/* <div className="carousel-item ">
+                <img src={"http://127.0.0.1:8000/seller"+data.banners[1].banner}  className="d-block w-100" alt="..."/>
+                <div className="carousel-caption d-none d-md-block">
+                   
                 </div>
                 </div>
                 <div className="carousel-item">
-                <img src="https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/67b53826ce8284e0.jpeg?q=20" className="d-block w-100" alt="..."/>
+                <img src={"http://127.0.0.1:8000/seller"+data.banners[2].banner}  className="d-block w-100" alt="..."/>
                 <div className="carousel-caption d-none d-md-block">
-                    {/* <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p> */}
+                   
                 </div>
                 </div>
                 <div className="carousel-item">
-                <img src="https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/0f9ecd9ce4f86cfa.jpg?q=20" className="d-block w-100" alt="..."/>
+                <img src={"http://127.0.0.1:8000/seller"+data.banners[3].banner}  className="d-block w-100" alt="..."/>
                 <div className="carousel-caption d-none d-md-block">
-                    {/* <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p> */}
+                   
                 </div>
-                </div>
+                </div> */}
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -40,7 +74,7 @@ function Carousel() {
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                 <span className="visually-hidden">Next</span>
             </button>
-        </div>
+        </div>}
     </>
   )
 }
