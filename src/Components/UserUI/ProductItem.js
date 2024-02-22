@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Rating from '../Products/MiniCompoProduct/Rating';
 
 function ProductItem(props) {
   const numbers = [ 1, 2, 3, 4,5];
@@ -25,11 +26,12 @@ function ProductItem(props) {
             <div className="content" style={{margin:'0% 2% 6% 2%'}}>
               <h5>{props.data.sellername}</h5>
               <h6>{props.data.name}</h6>
-              <div className="div" style={{display:'flex'}}>
-                {numbers.map((element,index)=>{
+              <div className="div" style={{display:'flex',width:'80px'}}>
+                <Rating star={props.data.rating}/>
+                {/* {numbers.map((element,index)=>{
                   return <p>{element<=props.data.rating?<span className="fa fa-star checked" style={{color:'orange'}}></span>:<span className="fa fa-star"></span>}</p>
 
-                })}
+                })} */}
                 <p> ^{props.data.len_review}</p>
               </div>
               <div className="div" style={{display:'flex'}}>
