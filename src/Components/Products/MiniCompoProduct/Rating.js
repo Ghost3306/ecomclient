@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import './star1.css'
 function Rating(props) {
-    const stars = new Array(props.star).fill('five-pointed-star-hover')
-    const moon = new Array(5-props.star).fill('five-pointed-star')
+    const stars = new Array(props.star).fill('five-point-star-hover')
+    const moon = new Array(5-props.star).fill('five-point-star')
     useEffect(()=>{
         
     },[])

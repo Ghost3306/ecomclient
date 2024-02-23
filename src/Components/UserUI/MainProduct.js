@@ -1,17 +1,23 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import BuyNow from './BuyNow';
 import replacement from './svg/replacement.png'
 import warrenty from './svg/warranty.png'
 import cod from './svg/cash-on-delivery.png'
+import Rating from '../Products/MiniCompoProduct/Rating';
 
 
 function MainProduct(props) {
   const [add, setAdd] = useState(null);
   const [cookie, setCookie] = useCookies(['user']);
   const [qun,setQuntity] = useState(1);
-  const [maindiv,setDiv] = useState(true)
+  const [maindiv,setDiv] = useState(true);
+  const [prodreviews,setreview] = useState(null);
+  useEffect(() => {
+    fetchreviews();
+  }, [])
+  
   const addcart = async()=>{
     console.log('adding to cart');
     const formdata = new FormData();
@@ -40,6 +46,21 @@ function MainProduct(props) {
         setQuntity(1)
       }else{
         setQuntity(qun-1)
+      }
+    }
+
+    async function fetchreviews(){
+      const formdata = new FormData();
+      formdata.append('prodid',props.data.uniqueid)
+      try{
+          const res = await axios.post('http://127.0.0.1:8000/products/getprodreview/',formdata,{
+            headers:{
+              'Content-Type':'multipart/form-data'
+            }
+          })
+          setreview(res.data.review)
+      }catch(error){
+        console.log(error);
       }
     }
   return (
@@ -145,26 +166,21 @@ function MainProduct(props) {
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <h6>Username</h6>
-                    <h5>5 Star</h5>
-                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
-                  </div>
-                  {/* <div class="accordion-body">
-                    <h6>Username</h6>
-                    <h5>5 Star</h5>
-                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
-                  </div>
-                  <div class="accordion-body">
-                    <h6>Username</h6>
-                    <h5>5 Star</h5>
-                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
-                  </div>
-                  <div class="accordion-body">
-                    <h6>Username</h6>
-                    <h5>5 Star</h5>
-                    <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus voluptatum, repellendus voluptate hic alias sapiente!</h6>
-                  </div> */}
+                  {prodreviews && prodreviews.map((element,index)=>{
+                    console.log(prodreviews);
+                      return <div class="accordion-body" key={index} >
+                        <h6>{element.reviwername}</h6>
+                        <div className="div" style={{width:'20px',position:'relative',left:'45%',transform:'translateX(-50%)'}}>
+                            <Rating star={element.star}/>
+                        </div>
+                        <h5>{element.title}</h5>
+                        <h6>{element.review}</h6>
+                        <hr/>
+                    </div>
+                    
+                  })}
+
+                  
                 </div>
               </div>
               

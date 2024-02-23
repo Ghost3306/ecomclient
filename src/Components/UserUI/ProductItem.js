@@ -14,17 +14,15 @@ function ProductItem(props) {
   }
   return (
     <>
-    {/* <h5>Result</h5>
-      {console.log(props.data)}
-       <p>{props.data[0].name}</p> */}
-       {/* {console.log(props.data[0].name)} */}
-       <div className="div" style={{height:'16rem',display:'flex',border:'1px solid black',margin:'10px 0 10px 10px'}} onClick={handleClick}>
+    
+       <div className="div" style={{height:'19.5rem',display:'flex',border:'1px solid black',margin:'10px 0 10px 10px'}} onClick={handleClick}>
           <div className="imageDiv" style={{width:'20%'}}>
             <img src={"http://127.0.0.1:8000/products"+props.data.image1} alt="" style={{width:'90%',margin:'6% 2% 6% 2%',aspectRatio:'1/1',objectFit:'contain'}}/>
           </div>
           <div className="contentDiv" style={{}}>
             <div className="content" style={{margin:'0% 2% 6% 2%'}}>
               <h5>{props.data.sellername}</h5>
+              <h6>{props.data.district}-{props.data.state}</h6>
               <h6>{props.data.name}</h6>
               <div className="div" style={{display:'flex',width:'80px'}}>
                 <Rating star={props.data.rating}/>

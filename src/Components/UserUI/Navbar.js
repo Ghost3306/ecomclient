@@ -13,6 +13,7 @@ export default function Navbar(props) {
   const [cookie,setCookie] = useCookies(['user'])
   const [loginm,setLoginNm] = useState(null);
   const [userclk,setclk] = useState(false);
+  const [input,setinput] = useState(null);
   useEffect(()=>{
     if(cookie.name){
       setLoginNm(cookie.name)
@@ -81,11 +82,13 @@ export default function Navbar(props) {
                 'Content-Type':'multipart/form-data'
             }
         })
+        setinput(inputValue)
         setRet(res.data);
         setRes(null);
         
         props.setproduct(res.data);
         props.tag(inputValue);
+        props.setinput(inputValue);
         // console.log('data setted to searched product',res.data);
         
         props.searched(false);
@@ -182,24 +185,7 @@ export default function Navbar(props) {
        
             </form>}
               
-              {/* {loginm?<div className="d-flex">
-              <p className="form-control me-4" onClick={()=>{
-                if(userclk){
-                  setclk(false);
-                }else{
-                  setclk(true);
-                }
-              }
-                }>Hello! {cookie.name}</p>
-              {userclk && <div className="div" style={{position:'absolute',top:'70%',border:'1px solid black',width:'10%',height:'300px',zIndex:'99',background:'#fff'}}>
-                        <button type="button" onClick={logout} className="btn btn-info btn-sm" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
-                </div>   }
-            </div>
               
-            :<form className="d-flex">
-                  <Link to='/login' className="btn btn-primary mx-4">Login</Link>
-       
-            </form>} */}
             
             </div>
             

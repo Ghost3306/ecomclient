@@ -3,6 +3,7 @@ import ProductItem from './ProductItem';
 import MainProduct from './MainProduct';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import SideBar from './SubUI/SideBar';
 function SearchedProd(props) {
     const [products, setProducts] = useState(null);
     const [prodstate,setState] = useState(true);
@@ -17,7 +18,10 @@ function SearchedProd(props) {
     <>
 
     {prodstate && <div className="contain" style={{width:'100%',height:'auto',display:'flex',}}>
-        <div className="side" style={{width:'20%',height:'100vh', borderRight:'1px solid black',borderBottom:'1px solid black'}}>Side</div>
+        <div className="side" style={{width:'20%',height:'100vh', borderRight:'1px solid black',borderBottom:'1px solid black'}}>
+            
+            <SideBar setproduct={setProducts} input={props.inputval}/>
+        </div>
         {products && <div className="product" style={{width:'80%',position:'absolute',left:'20%'}}>
             {products.map((element,index)=>{
                 return<div className="div" key={index} >

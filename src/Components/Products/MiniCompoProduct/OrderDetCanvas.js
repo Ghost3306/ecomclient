@@ -1,9 +1,10 @@
-import React from 'react'
-
+import React, { useRef } from 'react'
+import ReactToPrint from 'react-to-print';
 function OrderDetCanvas(props) {
+    let componentRef = useRef();
   return (
     <>
-        <div className="container" style={{position:'absolute',top:'11%',left:'25%',transform:'translate(-25% -25%',width:'120vh',height:'80vh',border:'1px solid black',background:'#fff'}}>
+        <div className="container" ref={(el) => (componentRef = el)} style={{position:'absolute',top:'11%',left:'25%',transform:'translate(-25% -25%',width:'120vh',height:'80vh',border:'1px solid black',background:'#fff'}}>
         <div class="d-flex bd-highlight">
             <div class="p-2 w-100 bd-highlight">
                 <h5>Order Details</h5>
@@ -48,7 +49,16 @@ function OrderDetCanvas(props) {
                 <div class="p-1 bd-highlight">Delivery Status: {props.element.delstatus}</div>
             </div>
         </div>
+        
         </div>
+        <div className="container" style={{position:'absolute',top:'80%',left:'25%',transform:'translate(-25% -25%',background:'transparent'}}>
+        <ReactToPrint  
+          trigger={() => <button className='btn btn-outline-info'>Print this out!</button>}
+          content={() => componentRef}
+        />
+
+        </div>
+        
     </>
   )
 }

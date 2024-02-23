@@ -1,4 +1,4 @@
-.five-pointed-star {
+.five-point-star {
     --star-color:black;
     margin:1em auto;
     font-size:0.6em;
@@ -11,7 +11,7 @@
     border-left: 1em solid transparent;
     transform: rotate(35deg);
    }
-   .five-pointed-star:before {
+.five-point-star:before {
     border-bottom: 0.8em solid var(--star-color);
     border-left: 0.3em solid transparent;
     border-right: 0.3em solid transparent;
@@ -24,7 +24,7 @@
     content:"";
     transform: rotate(-35deg);
    }
-   .five-pointed-star:after {
+.five-point-star:after {
     position: absolute;
     display: block;
     top: 0.03em;
@@ -39,10 +39,10 @@
    }
 
 
-   .five-pointed-star-hover {
+.five-point-star-hover {
     --star-color:orange;
     margin:1em auto;
-    font-size:2em;
+    font-size:0.6em;
     position: relative;
     display: block;
     width: 0px;
@@ -52,7 +52,7 @@
     border-left: 1em solid transparent;
     transform: rotate(35deg);
    }
-   .five-pointed-star-hover:before {
+.five-point-star-hover:before {
     border-bottom: 0.8em solid var(--star-color);
     border-left: 0.3em solid transparent;
     border-right: 0.3em solid transparent;
@@ -65,7 +65,7 @@
     content:"";
     transform: rotate(-35deg);
    }
-   .five-pointed-star-hover:after {
+.five-point-star-hover:after {
     position: absolute;
     display: block;
     top: 0.03em;

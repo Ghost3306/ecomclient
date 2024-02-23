@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import OffCanvasOrders from './MiniCompoProduct/OffCanvasOrders';
+import OrderDetCanvas from './MiniCompoProduct/OrderDetCanvas';
 function IncomingSellerOrders() {
     const [off,setOff]=useState(false);
     const [orderid,setid]=useState(null);
+    const [receipt,setreceipt] = useState(null);
     const setdiv=()=>{
         
         if(off){
@@ -43,6 +45,9 @@ function IncomingSellerOrders() {
 
 
     },[])
+    const close = ()=>{
+        setreceipt(null)
+    }
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -76,6 +81,13 @@ function IncomingSellerOrders() {
                             setid(element.uid);
                             setdiv(true);
                         }} >View</button></td>
+                        <td><button type="button" className="btn btn-primary" onClick={()=>{
+                            if(receipt){setreceipt(null)
+                            }else{
+                                setreceipt(element)
+                            }
+                            
+                            }}>receipt</button></td>
 
                         
                     </tr>
@@ -87,6 +99,8 @@ function IncomingSellerOrders() {
         {off && <div className="div" style={{position:'relative',top:'50%',left:'60%',transform:'translate(-50%,-50%)',background:'#fff'}}>
             <OffCanvasOrders setdiv={setdiv} setOrders={placedorders} id={orderid}/>
         </div>}
+        {receipt && <OrderDetCanvas close={close} element={receipt}/>}
+        
     </>
     
   )

@@ -10,6 +10,7 @@ function Homepage() {
   const [tag,setTag] = useState('')
   const [searched, setSearched] = useState(false);
   const [carousel,setCarousel] = useState(true);
+  const [input,setinput] = useState('')
  
   useEffect(()=>{
     console.log('useeffect in homepage');
@@ -18,9 +19,9 @@ function Homepage() {
   return (
 
     <>
-      <Navbar setproduct = {setproducts} tag={setTag} searched={setSearched} carousel = {setCarousel}/>
+      <Navbar setproduct = {setproducts} setinput={setinput} tag={setTag} searched={setSearched} carousel = {setCarousel}/>
       {carousel && <Carousel/>}
-      {searched && <SearchedProd name={product}/>}
+      {searched && <SearchedProd name={product} inputval = {input}/>}
       {carousel &&<Categories setproduct = {setproducts} searched={setSearched} carousel = {setCarousel}/>}
     </>
   )

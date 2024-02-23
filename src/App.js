@@ -39,6 +39,7 @@ function App() {
         <Route path='/savelater' element={<SaveLater/>}/>
         <Route path='/sellerhome/banner' element={<SellerBanner/>} />
         <Route path='/reviews' element={<AddReview/>}/>
+        
         <Route path="*" element={<NoPage/>} />
 
       </Routes>
