@@ -2,10 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import useRazorpay from "react-razorpay";
+import { useNavigate } from 'react-router-dom';
 function Razorpay(props) {
     const [order_id,setData] =useState(null);
     const [amount,setamount] =useState(null);
     const [cookies,setCookies] = useCookies(['user']);
+    const navigate = useNavigate()
     const [Razorpay] = useRazorpay();
     useEffect(()=>{
         console.log('type',typeof(props.amount));
@@ -26,6 +28,8 @@ function Razorpay(props) {
             console.log('order details',response.data);
             if(response.data.status==='200'){
                 props.placeorder();
+                
+                
             }else{
                 props.setmsg('order failed');
                 console.log('order failed');

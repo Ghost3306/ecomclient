@@ -87,12 +87,14 @@ function BuyNow(props) {
                     'Content-Type':'multipart/form-data',
                 }
             })
-            console.log(res.data);
+            console.log('onlineorder',res.data);
+            console.log(res.data.status);
             if(res.data.status==='200'){
+                console.log('order placed successfully');
                 setmsg(res.data.msg)
                 setTimeout(()=>{
-                    navigate('/')
-                },3000)
+                    props.setdiv(true)
+                },1000)
             }
         }catch(error){
             console.log(error);
@@ -172,7 +174,7 @@ function BuyNow(props) {
                     <div class="accordion-body">
                     <div className="div" style={{height:'12rem',display:'flex',margin:'10px 0 10px 10px'}} >
           <div className="imageDiv" style={{width:'20%',height:'100%'}}>
-            {console.log(props.data )}
+            {/* {console.log(props.data )} */}
             <img src={"http://localhost:8000/products"+props.data.image1} alt="" style={{width:'80%',height:'90%',margin:'6% 2% 6% 2%',aspectRatio:'1/1',objectFit:'contain'}}/>
           </div>
           <div className="contentDiv" style={{}}>
@@ -214,8 +216,8 @@ function BuyNow(props) {
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         <div className="d-flex justify-content-center">
-                            {console.log('buy now',props)}
-                            <Razorpay placeorder={placeorderbyonline} amount={parseInt(props.data.price*props.quntity+props.data.delivertcharge)} sellerid={props.data.sellerid}  userid={props.data.useruid}/>
+                            
+                            <Razorpay placeorder={placeorderbyonline} setdiv={props.setdiv} amount={parseInt(props.data.price*props.quntity+props.data.delivertcharge)} sellerid={props.data.sellerid} onClick={placeorderbyonline}  userid={props.data.useruid}/>
                             <button type="button" className='btn btn-primary' onClick={placeorder}>Cash on Delivery</button>
                         </div>
                         {msg && <h6>{msg}</h6>}
