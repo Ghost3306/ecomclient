@@ -78,11 +78,13 @@ function BuyNow(props) {
         formdata.append('city',cityVillage)
         formdata.append('landmark',landmark)
         formdata.append('pincode',pincode)
-
+        formdata.append('productid',props.data.uniqueid)
+        formdata.append('quantity',props.quntity)
         formdata.append('totalprice',props.data.price*props.quntity+props.data.delivertcharge)
         formdata.append('payment','prepaid')
+        formdata.append('date',new Date().toISOString().slice(0, 10))
         try{
-            const res = await axios.post('http://127.0.0.1:8000/products/orderplaced/',formdata,{
+            const res = await axios.post('http://127.0.0.1:8000/products/buynow/',formdata,{
                 headers:{
                     'Content-Type':'multipart/form-data',
                 }
