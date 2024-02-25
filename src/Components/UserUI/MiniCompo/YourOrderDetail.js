@@ -67,13 +67,14 @@ function YourOrderDetail(props) {
   return (
     <>
     {det &&<div className="card text-center" style={{width:'100%',marginBottom:'2%'}}>
+        {console.log('det',det)}
         <div className="card-header">
             <div className="d-flex bd-highlight " style={{height:'50px'}}>
                 <div className="p-1 bd-highlight mx-1">
                     <p>ORDER PLACED<br/>{det.date}</p>     
                 </div>
                 <div className="p-1 bd-highlight mx-1">      
-                    <p>TOTAL<br/>&#8377; 550</p> 
+                    <p>TOTAL<br/>&#8377; {parseInt(det.price)*parseInt(det.quantity)+parseInt(det.delivery)}</p> 
                 </div>
                 <div className="p-1 bd-highlight mx-1">
                     <p>SHIP TO<br/>{det.name}</p>

@@ -218,8 +218,8 @@ function BuyNow(props) {
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         <div className="d-flex justify-content-center">
-                            
-                            <Razorpay placeorder={placeorderbyonline} setdiv={props.setdiv} amount={parseInt(props.data.price*props.quntity+props.data.delivertcharge)} sellerid={props.data.sellerid} onClick={placeorderbyonline}  userid={props.data.useruid}/>
+                        
+                            <Razorpay placeorder={placeorderbyonline} setdiv={props.setdiv} amount={parseInt(props.data.price*props.quntity+props.data.delivertcharge)} sellerid={props.data.sellerid} onClick={placeorderbyonline}  userid={cookies.apikey}/>
                             <button type="button" className='btn btn-primary' onClick={placeorder}>Cash on Delivery</button>
                         </div>
                         {msg && <h6>{msg}</h6>}
