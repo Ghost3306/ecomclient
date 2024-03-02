@@ -5,12 +5,17 @@ function Carousel() {
     const [data,setBanners] = useState(null);
     async function fetch(){
         const formdata = new FormData()
-        const res = await axios.post('http://127.0.0.1:8000/seller/showbanner/',formdata,{
-            headers:{
-                'Content-Type':'multipart/form-data'
-            }
-        })
-        setBanners(res.data);
+        try{
+            const res = await axios.post('http://127.0.0.1:8000/seller/showbanner/',formdata,{
+                headers:{
+                    'Content-Type':'multipart/form-data'
+                }
+            })
+            setBanners(res.data);
+        }catch(error){
+            console.log(error);
+        }
+        
         
     }
     useEffect(()=>{
@@ -38,8 +43,8 @@ function Carousel() {
                     
                 </div>
                 </div>
-                {data.banners.slice(1).map((element,index)=>{
-                    return <div className="carousel-item ">
+                {data.banners && data.banners.slice(1).map((element,index)=>{
+                    return <div className="carousel-item " key={index}>
                     <img src={"http://127.0.0.1:8000/seller"+element.banner}  className="d-block w-100" alt="..."/>
                     <div className="carousel-caption d-none d-md-block">
                        
@@ -47,24 +52,6 @@ function Carousel() {
                     </div>
                 })}
 
-                {/* <div className="carousel-item ">
-                <img src={"http://127.0.0.1:8000/seller"+data.banners[1].banner}  className="d-block w-100" alt="..."/>
-                <div className="carousel-caption d-none d-md-block">
-                   
-                </div>
-                </div>
-                <div className="carousel-item">
-                <img src={"http://127.0.0.1:8000/seller"+data.banners[2].banner}  className="d-block w-100" alt="..."/>
-                <div className="carousel-caption d-none d-md-block">
-                   
-                </div>
-                </div>
-                <div className="carousel-item">
-                <img src={"http://127.0.0.1:8000/seller"+data.banners[3].banner}  className="d-block w-100" alt="..."/>
-                <div className="carousel-caption d-none d-md-block">
-                   
-                </div>
-                </div> */}
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>

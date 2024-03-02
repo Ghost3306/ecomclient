@@ -20,6 +20,7 @@ function BuyNow(props) {
     const numbers = [ 1, 2, 3, 4,5];
     const navigate = useNavigate()
     useEffect(()=>{
+        document.body.style.overflow = "visible";
         setfullname(cookies.name);
         setEmail(cookies.email);
         setPhone(cookies.phone)

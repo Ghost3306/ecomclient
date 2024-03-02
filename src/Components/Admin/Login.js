@@ -96,6 +96,7 @@ function Login() {
                 // console.log(res.data.data);
                 setres(res.data.data)
                 setdata(res.data.data)
+                
                 navigate('/')
             }
             if(res.data.status==='500'){

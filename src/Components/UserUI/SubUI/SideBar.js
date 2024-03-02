@@ -43,6 +43,7 @@ function SideBar(props) {
         try{
             const formdata = new FormData();
             formdata.append('input',props.input);
+            
             console.log(props.input);
             formdata.append('norate',norate)
             formdata.append('page',1)

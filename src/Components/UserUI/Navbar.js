@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRef,useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 export default function Navbar(props) {
   const [inputValue, setInputValue] = useState("");
   const [res, setRes] = useState(null);
@@ -18,6 +18,7 @@ export default function Navbar(props) {
     if(cookie.name){
       setLoginNm(cookie.name)
     }
+    
   },[])
 
   const handleInputFocus = () => {
@@ -44,6 +45,8 @@ export default function Navbar(props) {
 
   const logout =()=>{
     setCookie('name',null,{ path: '/' });
+    setCookie('apikey',null,{ path: '/' });
+    setCookie('email',null,{ path: '/' })
     setclk(false);
     setLoginNm(null);
   }

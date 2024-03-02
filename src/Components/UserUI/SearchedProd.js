@@ -4,16 +4,18 @@ import MainProduct from './MainProduct';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import SideBar from './SubUI/SideBar';
+import Login from '../Admin/Login';
 function SearchedProd(props) {
     const [products, setProducts] = useState(null);
     const [prodstate,setState] = useState(true);
     const [mainprod, setMain] = useState(null);
+    const [refresh,setrefresh] =useState(true);
     const [cookie, setCookie] = useCookies(['user']);
     const navigate = useNavigate();
     useEffect(()=>{
         setProducts(props.name)
-        
-    },[])
+        console.log('component rerendered');
+    },[refresh])
   return (
     <>
 
@@ -34,6 +36,8 @@ function SearchedProd(props) {
     </div>}
 
     {mainprod?cookie.apikey?<MainProduct data={mainprod}/>:navigate('/login'):console.log()}
+    
+    {/* {mainprod?cookie.apikey?<MainProduct data={mainprod}/>:<Login render={setrefresh}/>:console.log()} */}
     
     </>
     
