@@ -18,6 +18,7 @@ import SellerAds from './Components/Homepage/SellerAds';
 import SaveLater from './Components/UserUI/SaveLater';
 import SellerBanner from './Components/Products/SellerBanner';
 import AddReview from './Components/UserUI/AddReview';
+import InternalServer from './Components/Errors/InternalServer';
 function App() {
   return (
     <>
@@ -39,7 +40,7 @@ function App() {
         <Route path='/savelater' element={<SaveLater/>}/>
         <Route path='/sellerhome/banner' element={<SellerBanner/>} />
         <Route path='/reviews' element={<AddReview/>}/>
-        
+        <Route path="/500" element={<InternalServer/>}/>
         <Route path="*" element={<NoPage/>} />
 
       </Routes>

@@ -53,8 +53,9 @@ function IncomingSellerOrders() {
     }
   return (
     <>
+    <div className="div">
        <h5>Incoming Orders</h5>
-        {orders && <table className="table">
+        {orders && <table className="table" >
             <thead>
                 <tr>
                 <th scope="col">ID</th>
@@ -100,7 +101,7 @@ function IncomingSellerOrders() {
             <OffCanvasOrders setdiv={setdiv} setOrders={placedorders} id={orderid}/>
         </div>}
         {receipt && <OrderDetCanvas close={close} element={receipt}/>}
-        
+    </div>   
     </>
     
   )

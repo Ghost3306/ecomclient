@@ -13,7 +13,7 @@ function Products() {
     const [dele,setdelete] = useState(false);
     const [deldata, setdeldata] = useState('');
     const [load, setLoad] = useState(true)
-
+    const [pageno,setpage] = useState(1);
 
     const [addprod,setaddprod] = useState(false);
     const [prodname, setprodname] = useState('');
@@ -32,7 +32,26 @@ function Products() {
     const [image5, setImage5] = useState(null);
 
 
+    const onprev=async()=>{
+        fetchproducts();
+        if(pageno===1){
+            setpage(1)
+            
+        }else{
+            setpage(pageno-1)
+            
+        }
 
+        console.log(pageno);
+        
+    }
+    const onnext=async()=>{
+        fetchproducts();
+        setpage(pageno+1)
+        console.log(pageno);
+      
+        
+    }
 
     
     const onSubmit = (e)=>{
@@ -62,6 +81,7 @@ function Products() {
     async function fetchproducts(){
         const formdata = new FormData()
         formdata.append('sellerapi',cookie.sellerapikey)
+        formdata.append('page',pageno);
         try{
             const res = await axios.post('http://127.0.0.1:8000/products/sellerproducts/',formdata,{
                 headers:{
@@ -70,7 +90,11 @@ function Products() {
             })
             // console.log(res.data);
             console.log('products fetching');
-            setProducts(res.data)
+            setTimeout(()=>{
+                setProducts(res.data);
+                console.log("pageno",pageno,"\n",res.data);
+            },100)
+            
             // console.log('products',products);
             }catch(error){
                 console.log(error);
@@ -296,66 +320,72 @@ function Products() {
 
                 
         </div>}
+        <div className="d-flex justify-content-around">
+            <div className="div1">
+                <h5>Your Products</h5>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Unique id</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">#</th>
+                            <th scope="col">#</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products && products.map((element,index)=>{
+                            // console.log(element);
+                            const onviewclick = ()=>{
+                                console.log('element poping');
+                                popclick();
+                                setPopdata(element)
+                                console.log(element.image1);
+                            }
+                            const onupdateclick = ()=>{
+                                console.log('update click');
+                                if(addprod){
+                                    setaddprod(false)
+                                }else{
+                                    setaddprod(true)
+                                }
+                                setuid(element.uniqueid);
+                                setprodname(element.name);
+                                setcategory(element.category);
+                                setdescribe(element.description);
+                                setprice(element.price);
+                                setdelivery(element.delivertcharge);
+                                setwidth(element.width);
+                                setheight(element.height);
+                                setlength(element.length);
+                                
+                            }
+                            return <tr key={index}>
+                                <th scope="row">{element.uniqueid}</th>
+                                <td>{element.name}</td>
+                                <td>{element.category}</td>
+                            <td><button type="button" className='btn btn-primary btn-sm' onClick={onviewclick}>View</button></td>
+                            <td><button type="button" className='btn btn-danger btn-sm' onClick={()=>{setdelete(true);setLoad(false);setdeldata(element.uniqueid)}}>Delete</button></td>
+                            <td><button type="button" className='btn btn-primary btn-sm' onClick={onupdateclick}>Update</button></td>
+                        </tr> 
+                        })}
+                        <tr>
+                            <th scope="col"><button type="button" className='btn btn-outline-dark' onClick={onprev}>Prev</button></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"><button type="button" className='btn btn-outline-primary' onClick={onnext}>Next</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <h5>Your Products</h5>
-        <table className="table">
-            <thead>
-                <tr>
-                    <th scope="col">Unique id</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
-                </tr>
-            </thead>
-            <tbody>
-                {products && products.map((element,index)=>{
-                    // console.log(element);
-                    const onviewclick = ()=>{
-                        console.log('element poping');
-                        popclick();
-                        setPopdata(element)
-                        console.log(element.image1);
-                    }
-                    const onupdateclick = ()=>{
-                        console.log('update click');
-                        if(addprod){
-                            setaddprod(false)
-                        }else{
-                            setaddprod(true)
-                        }
-                        setuid(element.uniqueid);
-                        setprodname(element.name);
-                        setcategory(element.category);
-                        setdescribe(element.description);
-                        setprice(element.price);
-                        setdelivery(element.delivertcharge);
-                        setwidth(element.width);
-                        setheight(element.height);
-                        setlength(element.length);
-                        
-                    }
-                    return <tr key={index}>
-                        <th scope="row">{element.uniqueid}</th>
-                        <td>{element.name}</td>
-                        <td>{element.category}</td>
-                    <td><button type="button" className='btn btn-primary btn-sm' onClick={onviewclick}>View</button></td>
-                    <td><button type="button" className='btn btn-danger btn-sm' onClick={()=>{setdelete(true);setLoad(false);setdeldata(element.uniqueid)}}>Delete</button></td>
-                    <td><button type="button" className='btn btn-primary btn-sm' onClick={onupdateclick}>Update</button></td>
-                </tr> 
-                })}
-                <tr>
-                    <th scope="col"><button type="button" className='btn btn-outline-dark'>Prev</button></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"><button type="button" className='btn btn-outline-primary'>Next</button></th>
-                </tr>
-            </tbody>
-        </table>
-        <IncomingSellerOrders/>
+        </div>
+        
+        
+        
 
 
         {addprod && <div className="container my-3">
@@ -542,6 +572,10 @@ function Products() {
                     <p>Every should be in every angle of product</p>
                 </div>
                 </div>}
+
+                <div className="div" >
+        <IncomingSellerOrders/>
+        </div>
         
     
     </>

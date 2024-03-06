@@ -4,6 +4,7 @@ import SearchedProd from '../UserUI/SearchedProd'
 import Carousel from '../UserUI/Carousel';
 import axios from 'axios';
 import Categories from '../UserUI/Categories';
+import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
   const [product,setproducts] = useState('list will come');
@@ -11,10 +12,24 @@ function Homepage() {
   const [searched, setSearched] = useState(false);
   const [carousel,setCarousel] = useState(true);
   const [input,setinput] = useState('')
- 
+  const navigate = useNavigate();
+  async function pingserver(){
+    try{
+      const res = await axios.post('http://127.0.0.1:8000/ping',new FormData,{
+        headers:{
+          'Content-Type':'multipart/form-data'
+        }
+      })
+      console.log('server responded');
+      
+    }catch(error){
+      console.log('server disconnected');
+      navigate('/500')
+    }
+  }
   useEffect(()=>{
     console.log('useeffect in homepage');
-   
+    pingserver();
   },[])
   return (
 

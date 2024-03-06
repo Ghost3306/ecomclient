@@ -8,8 +8,20 @@ function OffCanvasOrders(props) {
     const [selectedOption, setSelectedOption] = useState('');
     const [courier,setCourier]= useState('courier');
     const [cookie,setCookie] = useCookies(['user']);
+    const[msg,setmsg] = useState(null)
     const handleChange = (event) => {
-        setSelectedOption(event.target.value);
+        if(event.target.value==='delivered' && order.delstatus!=='intransit'){
+            setTimeout(() => {
+                setmsg('Wrong state change')
+            }, 3000);
+        }else if(event.target.value==='intransit' && order.delstatus!=='dispatching'){
+            setTimeout(() => {
+                setmsg('Wrong state change')
+            }, 3000);
+        }else{
+            setSelectedOption(event.target.value);
+        }
+        
     }
     async function fetch(){
         const formdata = new FormData();
@@ -106,6 +118,7 @@ function OffCanvasOrders(props) {
         </div>
         
         :<div className="container">
+            {msg && <p>{msg}</p>}
             <h6>ID : {order.productid}</h6>
             <h5>{order.product}</h5>
             <div class="d-flex flex-row bd-highlight mb-3">
