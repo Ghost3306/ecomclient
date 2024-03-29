@@ -5,6 +5,7 @@ import Carousel from '../UserUI/Carousel';
 import axios from 'axios';
 import Categories from '../UserUI/Categories';
 import { useNavigate } from 'react-router-dom';
+import FooterContanct from '../FootSection/FooterContanct';
 
 function Homepage() {
   const [product,setproducts] = useState('list will come');
@@ -38,6 +39,8 @@ function Homepage() {
       {carousel && <Carousel/>}
       {searched && <SearchedProd name={product} inputval = {input}/>}
       {carousel &&<Categories setproduct = {setproducts} searched={setSearched} carousel = {setCarousel}/>}
+      {carousel &&<FooterContanct setproduct = {setproducts} searched={setSearched} carousel = {setCarousel}/>}
+      
     </>
   )
 }
