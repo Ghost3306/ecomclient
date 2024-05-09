@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ErrorMsg from '../Errors/ErrorMsg';
 import { useNavigate } from "react-router-dom";
 import { SHA256 } from 'crypto-js';
+import { useEffect } from 'react';
 const ForgotPass = () => {
     const [email,setEmail] = useState('');
     const [otp,setOTP] = useState('');
@@ -23,6 +24,10 @@ const ForgotPass = () => {
         'three':'red',
         'four':'red'
     })
+
+    useEffect(()=>{
+        document.title = 'Forgot Password';
+    },[])
 
     const [divState,setDivState] = useState({
         'email':true,

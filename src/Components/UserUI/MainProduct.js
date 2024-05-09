@@ -16,6 +16,7 @@ function MainProduct(props) {
   const [prodreviews,setreview] = useState(null);
   useEffect(() => {
     fetchreviews();
+    document.title = props.data.name;
   }, [])
   
   const addcart = async()=>{

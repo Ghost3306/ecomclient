@@ -49,6 +49,7 @@ function AddProduct() {
       };
     
     useEffect(()=>{
+        document.title = 'Online Bazaarpeth - Add Product';
         // return setCookie('sellerapikey',cookies.sellerapikey,{path:'/'})
     })
     const logout =()=>{

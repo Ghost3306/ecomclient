@@ -20,6 +20,7 @@ function AddReview() {
         }else{
             fetchlist();
         }
+        document.title = 'Online Bazaarpeth - Review';
     },[star])
     async function fetchlist(){
         try{

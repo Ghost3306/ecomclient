@@ -8,6 +8,7 @@ function SellerHome() {
   const [cookie,setCookie] = useCookies(['user'])
   const navigate = useNavigate();
   useEffect(()=>{
+    document.title = 'Seller Homepage';
     document.body.style.overflow = "visible";
     if(cookie.sellerapikey==='logout'){
       navigate('/sellerlogin')

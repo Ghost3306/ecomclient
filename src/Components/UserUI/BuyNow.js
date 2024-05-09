@@ -24,6 +24,7 @@ function BuyNow(props) {
         setfullname(cookies.name);
         setEmail(cookies.email);
         setPhone(cookies.phone)
+        document.title = 'Buy Now!';
     },[])
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);

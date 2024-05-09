@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import shopkeep from './shopkeeper.png'
 import customer from './customer-care.png'
@@ -17,6 +17,9 @@ function SellerAds() {
         setcolor1('#fff');
     }
 
+    useEffect(()=>{
+        document.title = 'Seller Homepage';
+    },[])
     const onhoverout = ()=>{
         setcolor('#fff');
         setnm('btn btn-primary mx-2');

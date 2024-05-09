@@ -12,6 +12,7 @@ function SellerBanner() {
     const [msg,setmsg] = useState(null);
     useEffect(()=>{
         fetch()
+        document.title = 'Online Bazaarpeth - Banners';
     },[msg])
     const onbanner = (event)=>{
         setBanner(event.target.files[0]);

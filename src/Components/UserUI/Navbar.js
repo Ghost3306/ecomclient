@@ -171,8 +171,7 @@ export default function Navbar(props) {
                   <Link to="/yourorders" className="btn btn-outline-primary my-3">Your Orders</Link>
                   <Link to="/reviews" className="btn btn-outline-primary my-3">Reviews</Link>
                   <Link to="/savelater" className="btn btn-outline-primary my-3">Save Later</Link>
-                  <Link to="/buyagain" className="btn btn-outline-primary my-3">Buy Again</Link>
-                  <Link to="/account" className="btn btn-outline-primary my-3">Your account</Link>
+                
                   <button type="button" onClick={logout} className="btn btn-info" style={{position:'absolute',left:'50%',top:'95%',transform:'translate(-50%,-95%)'}}>Logout</button>
                 </div>
                   

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ErrorMsg from '../Errors/ErrorMsg';
 import { useNavigate } from "react-router-dom";
 import { SHA256 } from 'crypto-js';
@@ -18,7 +18,9 @@ const ForgotPassSeller = () => {
     const [otpstate,setOTPState] = useState(false);
     const [passstatus,setPassStatus] = useState(false);
 
-
+    useEffect(()=>{
+        document.title = 'Forgot Password Seller';
+    },[])
     const [divState,setDivState] = useState({
         'email':true,
         'otp':false,

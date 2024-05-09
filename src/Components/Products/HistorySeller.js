@@ -40,6 +40,7 @@ function HistorySeller() {
   }
   useEffect(()=>{
     fetch()
+    document.title = 'Online Bazaarpeth - History';
   },[])
   return (
     <>

@@ -30,6 +30,7 @@ function Homepage() {
   }
   useEffect(()=>{
     console.log('useeffect in homepage');
+    document.title = 'Online Bazaarpeth - Home';
     pingserver();
   },[])
   return (

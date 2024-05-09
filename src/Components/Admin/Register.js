@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import ErrorMsg from '../Errors/ErrorMsg';
 import { Link, useNavigate } from "react-router-dom";
@@ -34,7 +34,9 @@ function Register() {
         }
         return false; 
       }
-
+      useEffect(()=>{
+        document.title = 'Register Customer';
+    },[])
     function containsNumber(str) {
         return /\d/.test(str);
     }

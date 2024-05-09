@@ -35,6 +35,7 @@ function Cart() {
         }catch(error){
             console.log(error);
         }
+        document.title = 'Online Bazaarpeth - Your Cart';
     },[cartid])
   return (
     <>

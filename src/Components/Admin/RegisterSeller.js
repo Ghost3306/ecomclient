@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import ErrorMsg from '../Errors/ErrorMsg';
 import { SHA256 } from 'crypto-js';
@@ -45,6 +45,10 @@ function RegisterSeller() {
     console.log(businessImage);
     setBusinessImage(event.target.files[0]);
 }
+
+useEffect(()=>{
+    document.title = 'Regiser Seller';
+},[])
 
     const onSubmit = (e)=>{
         e.preventDefault();

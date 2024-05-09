@@ -19,7 +19,7 @@ function SellerLogin() {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        document.title = 'Login'
+        document.title = 'Seller Login'
         console.log('login useeffect');
     },[])
 
