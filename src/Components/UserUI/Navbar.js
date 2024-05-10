@@ -81,6 +81,7 @@ export default function Navbar(props) {
         formdata.append('input',inputValue);
         formdata.append('page',1)
         setCookie('input',inputValue,{ path: '/' });
+        setCookie('input',inputValue,{ path: '/' });
         const res = await axios.post('http://127.0.0.1:8000/products/searchproduct/',formdata,{
             headers:{
                 'Content-Type':'multipart/form-data'

@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 function SideBar(props) {
+    const [cookies,setcookie] = useCookies(['user'])
     const price = async(pricetype)=>{
         try{
             const formdata = new FormData();
-            formdata.append('input',props.input);
+            formdata.append('input',cookies.input);
             console.log(props.input);
             formdata.append('price',pricetype)
             formdata.append('page',1)
@@ -23,7 +25,7 @@ function SideBar(props) {
     const rating = async(rate)=>{
         try{
             const formdata = new FormData();
-            formdata.append('input',props.input);
+            formdata.append('input',cookies.input);
             console.log(props.input);
             formdata.append('rate',rate)
             formdata.append('page',1)
@@ -42,7 +44,7 @@ function SideBar(props) {
     const norating = async(norate)=>{
         try{
             const formdata = new FormData();
-            formdata.append('input',props.input);
+            formdata.append('input',cookies.input);
             
             console.log(props.input);
             formdata.append('norate',norate)
